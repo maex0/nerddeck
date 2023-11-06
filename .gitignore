@@ -6,6 +6,9 @@
 *.fsx
 *.dll
 *.exe
+*.obj
+bin/
+obj/
 
 # Visual Studio
 .vscode/
@@ -55,3 +58,5 @@ ehthumbs.db
 # Ignore temporary files
 *.swp
 *~
+
+.fake
