@@ -1,9 +1,4 @@
-# Go
-*.go
-
 # F#
-*.fs
-*.fsx
 *.dll
 *.exe
 *.obj
