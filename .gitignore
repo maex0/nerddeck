@@ -1,0 +1,57 @@
+# Go
+*.go
+
+# F#
+*.fs
+*.fsx
+*.dll
+*.exe
+
+# Visual Studio
+.vscode/
+.vs/
+*.suo
+*.user
+*.sln.docstates
+_UpgradeReport_Files/
+Backup*/
+[Bb]in/
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+testresults/
+[Bb]uild[Ll]og.*
+*[Ss]ubjective[Ss]ub.*
+*.swp
+
+# Mac
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+ehthumbs.db
+[Tt]humbs.db
+
+# LaTeX
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.pdf
+*.toc
+
+# Ignore some LaTeX intermediate and generated files
+*.synctex.gz
+*.synctex(busy)
+*.synctex
+*.fls
+*.fdb_latexmk
+*.fdb
+*.lof
+*.lot
+
+# Ignore temporary files
+*.swp
+*~
