@@ -39,6 +39,9 @@ ehthumbs.db
 *.out
 *.pdf
 *.toc
+*.idx
+*.ilg
+*.ind
 
 # Ignore some LaTeX intermediate and generated files
 *.synctex.gz
