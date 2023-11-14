@@ -1,5 +1,7 @@
 # NerdDeck
 
+![Build Status](https://github.com/maex0/nerddeck/actions/workflows/build.yml/badge.svg)
+
 Welcome to NerdDeck, a project initiated during the first semester of my Master's program at [TH Rosenheim](https://www.th-rosenheim.de) in the course "Concepts of Programming Languages." In this project, I will be comparing two programming languages, [Go](https://go.dev) and [Haskell](https://www.haskell.org), within the context of functional programming.
 
 ## Project Overview
