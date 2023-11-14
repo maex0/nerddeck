@@ -1,10 +1,3 @@
-# F#
-*.dll
-*.exe
-*.obj
-bin/
-obj/
-
 # Visual Studio
 .vscode/
 .vs/
@@ -39,6 +32,9 @@ ehthumbs.db
 *.out
 *.pdf
 *.toc
+*.idx
+*.ilg
+*.ind
 
 # Ignore some LaTeX intermediate and generated files
 *.synctex.gz
@@ -55,3 +51,21 @@ ehthumbs.db
 *~
 
 .fake
+
+# Haskell
+/dist/
+/cabal-dev/
+/cabal-sandbox/
+*.cabal
+*.hi
+*.o
+*.o.d
+.hpc/
+*.chi
+*.chs.h
+*.dyn_o
+*.dyn_hi
+*.p_o
+*.p_hi
+.hie/
+*.hie
