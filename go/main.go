@@ -66,6 +66,5 @@ func getUserInput(prompt string) string {
 	fmt.Print(prompt)
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
-	adsfasdlf
 	return strings.TrimSpace(scanner.Text())
 }
