@@ -12,6 +12,8 @@ This repository is dedicated to exploring the paradigms of functional programmin
 - [Project Overview](#project-overview)
 - [Goals](#goals)
 - [Getting Started](#getting-started)
+- [Database](#database)
+  - [Database Schema](#database-schema)
 - [Functional Programming in Go](#functional-programming-in-go)
 - [Functional Programming in Haskell](#functional-programming-in-haskell)
 - [Examples](#examples)
@@ -24,6 +26,25 @@ This repository is dedicated to exploring the paradigms of functional programmin
 - Provide practical examples and use cases to demonstrate the strengths and weaknesses of each language.
 
 ## Getting Started
+
+## Database
+
+**Disclaimer:** For the purpose of this project, a single json file is used as a simple and lightweight database to store flashcards. While this approach is suitable for educational and illustrative purposes, it may not be suitable for production usage due to limitations in scalability and concurrent access.
+
+In a production environment, a more robust database solution should be considered, such as a relational database (e.g., PostgreSQL, MySQL) or a NoSQL database (e.g., MongoDB). The choice of the database will depend on the specific requirements of the application.
+
+### Database Schema
+
+The flashcard data is stored in a JSON file with the following structure:
+
+```json
+[
+  {
+    "question": "What is functional programming?",
+    "answer": "Functional programming is a programming paradigm that treats computation as the evaluation of mathematical functions and avoids changing-state and mutable data."
+  }
+]
+```
 
 ## Contributing
 
