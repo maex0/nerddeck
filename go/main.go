@@ -9,7 +9,16 @@ import (
 )
 
 func main() {
-	fmt.Println("Welcome to NerdDeck!")
+	nerdDeckASCII :=
+	`
+    _   __              ______            __  
+   / | / /__  _________/ / __ \___  _____/ /__
+  /  |/ / _ \/ ___/ __  / / / / _ \/ ___/ //_/
+ / /|  /  __/ /  / /_/ / /_/ /  __/ /__/ ,<   
+/_/ |_/\___/_/   \__,_/_____/\___/\___/_/|_|  
+`
+	fmt.Println("\nWelcome to\n",nerdDeckASCII)
+	fmt.Println("Developed by Maximilian Gobbel")
 	fmt.Println("If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck")
 
 	var cards []flashcards.BasicFlashCard
