@@ -16,6 +16,7 @@ This repository is dedicated to exploring the paradigms of functional programmin
 - [Getting Started](#getting-started)
 - [Database](#database)
   - [Database Schema](#database-schema)
+- [Model](#Model)
 - [Functional Programming in Go](#functional-programming-in-go)
 - [Functional Programming in Haskell](#functional-programming-in-haskell)
 - [Examples](#examples)
@@ -26,6 +27,7 @@ This repository is dedicated to exploring the paradigms of functional programmin
 
 - Compare and contrast the key features of Go and Haskell as functional programming languages.
 - Provide practical examples and use cases to demonstrate the strengths and weaknesses of each language.
+- Implement the spaced repetition algorithm SM-2. Information about this algorithm can be found [here](https://www.supermemo.com/en/blog/application-of-a-computer-to-improve-the-results-obtained-in-working-with-the-supermemo-method)
 
 ## Getting Started
 
@@ -47,6 +49,12 @@ The flashcard data is stored in a JSON file with the following structure:
   }
 ]
 ```
+
+## Model
+
+Current Model (this probably will change after time)
+
+![Nerddeck model](NerddeckModel.png)
 
 ## Contributing
 
