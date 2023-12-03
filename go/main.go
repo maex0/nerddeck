@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"fmt"
 	"nerddeck/flashcards"
 	"os"
@@ -23,6 +24,9 @@ func main() {
 
 	var cards []flashcards.BasicFlashCard
 
+	// Load flashcards from a file, if available
+	loadFlashCards(&cards)
+
 	for {
 		fmt.Println("\nOptions:")
 		fmt.Println("1. Add Flash Card")
@@ -37,7 +41,7 @@ func main() {
 			question := getUserInput("Enter the question: ")
 			answer := getUserInput("Enter the answer: ")
 
-			newCard := flashcards.BasicFlashCard{Front: question, Back: answer}
+			newCard := flashcards.BasicFlashCard{Question: question, Answer: answer}
 			cards = append(cards, newCard)
 			
 			fmt.Println("Flash card added successfully!")
@@ -45,7 +49,7 @@ func main() {
 		case "2":
 			fmt.Println("\nFlash Cards:")
 			for i, card := range cards {
-				fmt.Printf("%d. Q: %s\n   A: %s\n", i+1, card.Front, card.Back)
+				fmt.Printf("%d. Q: %s\n   A: %s\n", i+1, card.Question, card.Answer)
 			}
 
 		case "3":
@@ -56,12 +60,14 @@ func main() {
 
 			fmt.Println("Starting Learning Mode. You got this :)")
 			for _, card := range cards {
-				fmt.Printf("Q: %s\n", card.Front)
+				fmt.Printf("Q: %s\n", card.Question)
 				getUserInput("Press Enter to reveal the answer...")
-				fmt.Printf("A: %s\n\n", card.Back)
+				fmt.Printf("A: %s\n\n", card.Answer)
 			}
 
 		case "4":
+			// Save flashcards to a file before exiting
+			saveFlashCards(cards)
 			fmt.Println("Exiting NerdDeck. Goodbye!")
 			os.Exit(0)
 
@@ -76,4 +82,32 @@ func getUserInput(prompt string) string {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	return strings.TrimSpace(scanner.Text())
+}
+
+
+func loadFlashCards(cards *[]flashcards.BasicFlashCard) {
+	file, err := os.ReadFile("flashcards.json")
+	if err == nil {
+		err = json.Unmarshal(file, &cards)
+		if err != nil {
+			fmt.Println("Error loading flashcards:", err)
+		} else {
+			fmt.Println("Flashcards loaded successfully.")
+		}
+	}
+}
+
+func saveFlashCards(cards []flashcards.BasicFlashCard) {
+	file, err := json.MarshalIndent(cards, "", "  ")
+	if err != nil {
+		fmt.Println("Error saving flashcards:", err)
+		return
+	}
+
+	err = os.WriteFile("flashcards.json", file, 0644)
+	if err != nil {
+		fmt.Println("Error saving flashcards:", err)
+	} else {
+		fmt.Println("Flashcards saved successfully.")
+	}
 }

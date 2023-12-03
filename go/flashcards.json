@@ -1,0 +1,14 @@
+[
+  {
+    "ID": 0,
+    "Question": "",
+    "Answer": "",
+    "Interval": 0,
+    "Ease": 0,
+    "ReviewDate": "0001-01-01T00:00:00Z",
+    "Deck": {
+      "ID": 0,
+      "Name": ""
+    }
+  }
+]

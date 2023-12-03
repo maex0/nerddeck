@@ -1,14 +1,23 @@
 package flashcards
 
+import (
+	"time"
+)
+
 type BasicFlashCard struct {
-	Front string
-	Back  string
+	ID int
+	Question string
+	Answer  string
+	Interval int
+	Ease int
+	ReviewDate time.Time
+	Deck Deck
 }
 
 func (card BasicFlashCard) ShowQuestion() string {
-    return card.Front
+    return card.Question
 }
 
 func (card BasicFlashCard) ShowAnswer() string {
-    return card.Back
+    return card.Answer
 }
