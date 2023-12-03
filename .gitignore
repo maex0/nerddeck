@@ -69,3 +69,7 @@ ehthumbs.db
 *.p_hi
 .hie/
 *.hie
+
+
+# executable
+nerddeck
