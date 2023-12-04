@@ -5,22 +5,3 @@ module SM2
 import Model.Flashcard
 import Model.Deck
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

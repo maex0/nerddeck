@@ -6,6 +6,7 @@ module Model.Flashcard
     , addToDeck
     , FlashcardDeck
     , reviewDeck
+    , initialInterval
     ) where
 
 import Model.Deck
@@ -22,15 +23,18 @@ data Flashcard = Flashcard
 
 data Ease = Ease1 | Ease2 | Ease3 | Ease4 | Ease5 deriving (Show)
 
+initialInterval :: Int
+initialInterval = 1
+
 type FlashcardDeck = [Flashcard]
 
 easeLevel :: Ease -> Int
 easeLevel e = case e of
-  Ease1 -> 1
-  Ease2 -> 2
-  Ease3 -> 3
-  Ease4 -> 4
-  Ease5 -> 5
+    Ease1 -> 1
+    Ease2 -> 2
+    Ease3 -> 3
+    Ease4 -> 4
+    Ease5 -> 5
 
 presentFlashcard :: Flashcard -> Flashcard
 presentFlashcard card = card { interval = 1 }
