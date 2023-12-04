@@ -75,9 +75,19 @@ handleMenuOption 3 deck = do
             putStrLn $ "\n\n---Question---\n" ++ question currentCard
             putStrLn "---Press Enter to reveal the answer..."
             _ <- getLine  -- Wait for Enter
-            putStrLn $ "---Answer---\n" ++ answer currentCard ++ "\n\n"  
+            putStrLn $ "---Answer---\n" ++ answer currentCard ++ "\n\n"
 
-    --endSession newSession
+            -- putStrLn "Did you recall the answer correctly? (y/n): "
+            -- successOption <- getLine
+        
+            -- let success = successOption == "y" || successOption == "Y"
+
+            -- let updatedSession = endSession success newSession
+            -- putStrLn "Review recorded!"
+
+            -- -- Recursively call handleMenuOption 3 with the updated session and deck
+            -- handleMenuOption 3 (sessionDeck updatedSession)
+   
     mainMenu deck
 
 handleMenuOption 4 deck = do

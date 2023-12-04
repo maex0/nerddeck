@@ -14,8 +14,8 @@ data Session = Session
 startNewSession :: FlashcardDeck -> Session
 startNewSession deck = Session { sessionDeck = deck, sessionSuccess = False }
 
-endSession :: Session -> FlashcardDeck
-endSession session = reviewDeck (sessionDeck session) (sessionSuccess session)
+endSession :: Bool -> Session -> Session
+endSession success session = session { sessionDeck = reviewDeck (sessionDeck session) success, sessionSuccess = success }
 
 getCurrentCard :: Session -> Maybe Flashcard
 getCurrentCard session =
