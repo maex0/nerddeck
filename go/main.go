@@ -84,6 +84,14 @@ func addFlashCard(cards *[]flashcards.FlashCard) {
 	question := getUserInput("Enter the question: ")
 	answer := getUserInput("Enter the answer: ")
 
+	// Verify unique ids (question + answer must be unique)
+	id := flashcards.GenerateID(question, answer)
+	existingCard := flashcards.FindCardByID(*cards, id)
+	if existingCard != nil {
+		fmt.Println("A card with the same question and answer already exists.")
+		return
+	}
+
 	newCard := flashcards.NewFlashCard(question, answer)
 	*cards = append(*cards, newCard)
 

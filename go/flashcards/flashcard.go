@@ -25,7 +25,7 @@ type FlashCard struct {
 
 func NewFlashCard(question, answer string) FlashCard {
 	return FlashCard{
-		ID:          generateID(question, answer),
+		ID:          GenerateID(question, answer),
 		Question:    question,
 		Answer:      answer,
 		Repetitions: defaultRepetitions,          // Start with 0 for no assumed successful recall
@@ -67,7 +67,7 @@ func convertGrade(grade string) int {
 	return numericGrade
 }
 
-func generateID(question, answer string) string {
+func GenerateID(question, answer string) string {
 	// Concatenate question and answer
 	data := []byte(question + answer)
 
@@ -95,7 +95,6 @@ func GetDueFlashcards(cards []FlashCard) []FlashCard {
 	return dueFlashcards
 }
 
-// Function to find a card by its ID
 func FindCardByID(cards []FlashCard, id string) *FlashCard {
 	for i, card := range cards {
 		if card.ID == id {
