@@ -9,6 +9,11 @@ import (
 	"time"
 )
 
+const (
+	defaultRepetitions = 0
+	defaultEFactor     = 2.5
+)
+
 type FlashCard struct {
 	ID          string
 	Question    string
@@ -19,23 +24,14 @@ type FlashCard struct {
 }
 
 func NewFlashCard(question, answer string) FlashCard {
-	id := generateID(question, answer)
 	return FlashCard{
-		ID:          id,
+		ID:          generateID(question, answer),
 		Question:    question,
 		Answer:      answer,
-		Repetitions: 0,                           // Start with 0 for no assumed successful recall
-		EFactor:     2.5,                         // Default Easiness Factor
+		Repetitions: defaultRepetitions,          // Start with 0 for no assumed successful recall
+		EFactor:     defaultEFactor,              // Default Easiness Factor
 		NextReview:  time.Now().AddDate(0, 0, 0), // Default Next Review Date (1 day in the future)
 	}
-}
-
-func (card FlashCard) ShowQuestion() string {
-	return card.Question
-}
-
-func (card FlashCard) ShowAnswer() string {
-	return card.Answer
 }
 
 func (card *FlashCard) ApplySM2Algorithm(grade string) {
@@ -82,4 +78,29 @@ func generateID(question, answer string) string {
 
 	// Convert hash to a hexadecimal string
 	return hex.EncodeToString(hashInBytes)
+}
+
+// Function to get flashcards that are due for review today
+func GetDueFlashcards(cards []FlashCard) []FlashCard {
+	var dueFlashcards []FlashCard
+
+	currentDate := time.Now()
+
+	for _, card := range cards {
+		if currentDate.After(card.NextReview) || currentDate.Equal(card.NextReview) {
+			dueFlashcards = append(dueFlashcards, card)
+		}
+	}
+
+	return dueFlashcards
+}
+
+// Function to find a card by its ID
+func FindCardByID(cards []FlashCard, id string) *FlashCard {
+	for i, card := range cards {
+		if card.ID == id {
+			return &cards[i]
+		}
+	}
+	return nil
 }

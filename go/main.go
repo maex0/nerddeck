@@ -2,25 +2,17 @@ package main
 
 import (
 	"bufio"
-	"encoding/json"
 	"fmt"
 	"nerddeck/flashcards"
+	"nerddeck/storage"
 	"os"
 	"strings"
-	"sync"
-	"time"
 )
 
-var mu sync.Mutex
-
 func main() {
-
 	printWelcomeMessage()
-
 	var cards []flashcards.FlashCard
-
-	// Load flashcards from a file, if available
-	loadFlashCards(&cards)
+	storage.LoadFlashCards(&cards)
 
 	for {
 		printMainMenu()
@@ -37,7 +29,9 @@ func main() {
 		case "3":
 			startLearning(&cards)
 		case "4":
-			saveAndExit(cards)
+			fmt.Println("\n\n================================")
+			fmt.Println("Exiting NerdDeck. Goodbye!")
+			os.Exit(0)
 		default:
 			fmt.Println("Invalid option. Please try again.")
 		}
@@ -67,6 +61,7 @@ func printWelcomeMessage() {
 	fmt.Println("\nWelcome to\n", nerdDeckASCII)
 	fmt.Println("Developed by Maximilian Gobbel")
 	fmt.Println("If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck")
+	fmt.Println("For the best experience go full screen mode.")
 }
 
 func printInstructions() {
@@ -92,8 +87,7 @@ func addFlashCard(cards *[]flashcards.FlashCard) {
 	newCard := flashcards.NewFlashCard(question, answer)
 	*cards = append(*cards, newCard)
 
-	// Presave cards
-	saveFlashCards(*cards)
+	storage.SaveFlashCards(*cards)
 
 	fmt.Println("Flash card added successfully!")
 }
@@ -106,7 +100,6 @@ func viewFlashCards(cards *[]flashcards.FlashCard) {
 	for i, card := range *cards {
 		fmt.Printf("%d. Q: %s\n   A: %s\n", i+1, card.Question, card.Answer)
 	}
-
 }
 
 func startLearning(cards *[]flashcards.FlashCard) {
@@ -116,7 +109,7 @@ func startLearning(cards *[]flashcards.FlashCard) {
 	}
 
 	// Check for due flashcards based on the current date
-	dueFlashcards := getDueFlashcards(*cards)
+	dueFlashcards := flashcards.GetDueFlashcards(*cards)
 
 	if len(dueFlashcards) == 0 {
 		fmt.Println("No flashcards are due for review today.")
@@ -124,24 +117,17 @@ func startLearning(cards *[]flashcards.FlashCard) {
 		fmt.Println("Due Flash Cards:")
 		fmt.Println("Starting Learning Mode. You got this :)")
 		for _, dueCard := range dueFlashcards {
-			card := findCardByID(*cards, dueCard.ID)
+			card := flashcards.FindCardByID(*cards, dueCard.ID)
 			fmt.Printf("Q: %s\n", card.Question)
 			getUserInput("Press Enter to reveal the answer...")
 			fmt.Printf("A: %s\n\n", card.Answer)
 
-			// Apply SM2 algorithm
 			grade := getUserInput("How well did you remember this card 1-4\n")
 			card.ApplySM2Algorithm(grade)
 		}
 
-		saveFlashCards(*cards)
+		storage.SaveFlashCards(*cards)
 	}
-}
-
-func saveAndExit(cards []flashcards.FlashCard) {
-	saveFlashCards(cards)
-	fmt.Println("Exiting NerdDeck. Goodbye!")
-	os.Exit(0)
 }
 
 func getUserInput(prompt string) string {
@@ -149,55 +135,4 @@ func getUserInput(prompt string) string {
 	scanner := bufio.NewScanner(os.Stdin)
 	scanner.Scan()
 	return strings.TrimSpace(scanner.Text())
-}
-
-func loadFlashCards(cards *[]flashcards.FlashCard) {
-	file, err := os.ReadFile("flashcards.json")
-	if err == nil {
-		err = json.Unmarshal(file, &cards)
-		if err != nil {
-			fmt.Println("Error loading flashcards:", err)
-		}
-	}
-}
-
-func saveFlashCards(cards []flashcards.FlashCard) {
-	mu.Lock()
-	defer mu.Unlock()
-
-	file, err := json.MarshalIndent(cards, "", "  ")
-	if err != nil {
-		fmt.Println("Error saving flashcards:", err)
-		return
-	}
-
-	err = os.WriteFile("flashcards.json", file, 0644)
-	if err != nil {
-		fmt.Println("Error saving flashcards:", err)
-	}
-}
-
-// Function to get flashcards that are due for review today
-func getDueFlashcards(cards []flashcards.FlashCard) []flashcards.FlashCard {
-	var dueFlashcards []flashcards.FlashCard
-
-	currentDate := time.Now()
-
-	for _, card := range cards {
-		if currentDate.After(card.NextReview) || currentDate.Equal(card.NextReview) {
-			dueFlashcards = append(dueFlashcards, card)
-		}
-	}
-
-	return dueFlashcards
-}
-
-// Function to find a card by its ID
-func findCardByID(cards []flashcards.FlashCard, id string) *flashcards.FlashCard {
-	for i, card := range cards {
-		if card.ID == id {
-			return &cards[i]
-		}
-	}
-	return nil
 }
