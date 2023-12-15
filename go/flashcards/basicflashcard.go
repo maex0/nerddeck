@@ -16,7 +16,6 @@ type BasicFlashCard struct {
 	Repetitions int
 	EFactor     float64
 	NextReview  time.Time
-	Deck        Deck
 }
 
 func NewBasicFlashCard(question, answer string) BasicFlashCard {
