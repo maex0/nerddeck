@@ -8,30 +8,45 @@ import (
 	"sync"
 )
 
+const (
+	flashcardsFile = "flashcards.json"
+	filemode       = 0644
+	indent         = "  "
+)
+
 var mu sync.Mutex
 
-func LoadFlashCards(cards *[]flashcards.FlashCard) {
-	file, err := os.ReadFile("flashcards.json")
-	if err == nil {
-		err = json.Unmarshal(file, &cards)
-		if err != nil {
-			fmt.Println("Error loading flashcards:", err)
-		}
-	}
-}
-
-func SaveFlashCards(cards []flashcards.FlashCard) {
+func LoadFlashCards() ([]flashcards.FlashCard, error) {
+	var cards []flashcards.FlashCard
 	mu.Lock()
 	defer mu.Unlock()
 
-	file, err := json.MarshalIndent(cards, "", "  ")
+	file, err := os.ReadFile(flashcardsFile)
 	if err != nil {
-		fmt.Println("Error saving flashcards:", err)
-		return
+		return nil, err
 	}
 
-	err = os.WriteFile("flashcards.json", file, 0644)
+	err = json.Unmarshal(file, &cards)
 	if err != nil {
-		fmt.Println("Error saving flashcards:", err)
+		return nil, fmt.Errorf("Error loading flashcards: %w", err)
 	}
+
+	return cards, nil
+}
+
+func SaveFlashCards(cards []flashcards.FlashCard) error {
+	mu.Lock()
+	defer mu.Unlock()
+
+	file, err := json.MarshalIndent(cards, "", indent)
+	if err != nil {
+		return fmt.Errorf("Error saving flashcards: %w", err)
+	}
+
+	err = os.WriteFile(flashcardsFile, file, filemode)
+	if err != nil {
+		return fmt.Errorf("Error saving flashcards: %w", err)
+	}
+
+	return nil
 }

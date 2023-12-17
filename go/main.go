@@ -11,8 +11,11 @@ import (
 
 func main() {
 	printWelcomeMessage()
-	var cards []flashcards.FlashCard
-	storage.LoadFlashCards(&cards)
+	cards, err := storage.LoadFlashCards()
+	if err != nil {
+		fmt.Printf("Error loading flashcards: %v\n", err)
+		os.Exit(1)
+	}
 
 	for {
 		printMainMenu()
@@ -23,11 +26,17 @@ func main() {
 		case "0":
 			printInstructions()
 		case "1":
-			addFlashCard(&cards)
+			cards, err = addFlashCard(cards)
+			if err != nil {
+				fmt.Printf("Error adding flashcard: %v\n", err)
+			}
 		case "2":
-			viewFlashCards(&cards)
+			viewFlashCards(cards)
 		case "3":
-			startLearning(&cards)
+			cards, err = startLearning(cards)
+			if err != nil {
+				fmt.Printf("Error starting learning: %v\n", err)
+			}
 		case "4":
 			fmt.Println("\n\n================================")
 			fmt.Println("Exiting NerdDeck. Goodbye!")
@@ -80,62 +89,69 @@ func printInstructions() {
 	fmt.Println("================================\n\n")
 }
 
-func addFlashCard(cards *[]flashcards.FlashCard) {
+func addFlashCard(cards []flashcards.FlashCard) ([]flashcards.FlashCard, error) {
 	question := getUserInput("Enter the question: ")
 	answer := getUserInput("Enter the answer: ")
 
 	// Verify unique ids (question + answer must be unique)
 	id := flashcards.GenerateID(question, answer)
-	existingCard := flashcards.FindCardByID(*cards, id)
+	existingCard := flashcards.FindCardByID(cards, id)
 	if existingCard != nil {
-		fmt.Println("A card with the same question and answer already exists.")
-		return
+		return cards, fmt.Errorf("A card with the same question and answer already exists.")
 	}
 
 	newCard := flashcards.NewFlashCard(question, answer)
-	*cards = append(*cards, newCard)
+	cards = append(cards, newCard)
 
-	storage.SaveFlashCards(*cards)
+	err := storage.SaveFlashCards(cards)
+	if err != nil {
+		return cards, fmt.Errorf("Error saving flashcards: %v", err)
+	}
 
 	fmt.Println("Flash card added successfully!")
+	return cards, nil
 }
 
-func viewFlashCards(cards *[]flashcards.FlashCard) {
-	if len(*cards) == 0 {
+func viewFlashCards(cards []flashcards.FlashCard) {
+	if len(cards) == 0 {
 		fmt.Println("No flash cards available. Add some cards first.")
 		return
 	}
-	for i, card := range *cards {
+	for i, card := range cards {
 		fmt.Printf("%d. Q: %s\n   A: %s\n", i+1, card.Question, card.Answer)
 	}
 }
 
-func startLearning(cards *[]flashcards.FlashCard) {
-	if len(*cards) == 0 {
-		fmt.Println("No flash cards available. Add some cards first.")
-		return
+func startLearning(cards []flashcards.FlashCard) ([]flashcards.FlashCard, error) {
+	if len(cards) == 0 {
+		return cards, fmt.Errorf("No flash cards available. Add some cards first.")
 	}
 
 	// Check for due flashcards based on the current date
-	dueFlashcards := flashcards.GetDueFlashcards(*cards)
+	dueFlashcards := flashcards.GetDueFlashcards(cards)
 
 	if len(dueFlashcards) == 0 {
 		fmt.Println("No flashcards are due for review today.")
-	} else {
-		fmt.Println("Due Flash Cards:")
-		fmt.Println("Starting Learning Mode. You got this :)")
-		for _, dueCard := range dueFlashcards {
-			card := flashcards.FindCardByID(*cards, dueCard.ID)
-			fmt.Printf("Q: %s\n", card.Question)
-			getUserInput("Press Enter to reveal the answer...")
-			fmt.Printf("A: %s\n\n", card.Answer)
-
-			grade := getUserInput("How well did you remember this card 1-4\n")
-			card.ApplySM2Algorithm(grade)
-		}
-
-		storage.SaveFlashCards(*cards)
+		return cards, fmt.Errorf("No flashcards are due for review today.")
 	}
+	fmt.Println("Due Flash Cards:")
+	fmt.Println("Starting Learning Mode. You got this :)")
+	for _, dueCard := range dueFlashcards {
+		card := flashcards.FindCardByID(cards, dueCard.ID)
+		fmt.Printf("Q: %s\n", card.Question)
+		getUserInput("Press Enter to reveal the answer...")
+		fmt.Printf("A: %s\n\n", card.Answer)
+
+		grade := getUserInput("How well did you remember this card 1-4\n")
+		card.ApplySM2Algorithm(grade)
+	}
+
+	err := storage.SaveFlashCards(cards)
+	if err != nil {
+		return cards, fmt.Errorf("Error saving flashcards: %v", err)
+	}
+
+	return cards, nil
 }
 
 func getUserInput(prompt string) string {
