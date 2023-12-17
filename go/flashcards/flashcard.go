@@ -14,7 +14,7 @@ const (
 	defaultEFactor    = 2.5
 	firstRepetition   = 1
 	secondRepetition  = 2
-	gradeOne          = 1
+	GradeOne          = 1
 	gradeTwo          = 2
 	gradeThree        = 3
 	gradeFour         = 4
@@ -65,9 +65,9 @@ func (card *FlashCard) ApplySM2Algorithm(grade string) {
 
 func convertGrade(grade string) int {
 	numericGrade, err := strconv.Atoi(grade)
-	if err != nil || numericGrade < gradeOne || numericGrade > gradeFour {
-		fmt.Printf("Invalid grade. Using default grade %d.", gradeOne)
-		return gradeOne // Default to the lowest grade
+	if err != nil || numericGrade < GradeOne || numericGrade > gradeFour {
+		fmt.Printf("Invalid grade. Using default grade %d.", GradeOne)
+		return GradeOne // Default to the lowest grade
 	}
 
 	return numericGrade
