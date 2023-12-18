@@ -1,39 +1,19 @@
 ﻿open System
-open System.IO
-open System.Text.Json
-open Library
+open FlashCard
+open File
 
 
-let flashcardsFile = "flashcards.json"
-
-let loadFlashCards() =
-    try
-        let file = File.ReadAllText(flashcardsFile)
-        let cards = JsonSerializer.Deserialize<FlashCard list>(file)
-        Ok cards
-    with
-    | :? FileNotFoundException -> Ok []
-    | ex -> Error ex
-
-let saveFlashCards (cards: FlashCard list) =
-    try
-        let options = JsonSerializerOptions(WriteIndented = true)
-        let file = JsonSerializer.Serialize(cards, options)
-        File.WriteAllText(flashcardsFile, file)
-        Ok ()
-    with
-    | ex -> Error ex
 
 let printMainMenu() =
-    printfn "\n\n================================"
-    printfn "🚀 Main Menu, please make a choice"
-    printfn "options"
-    printfn "0. Instructions"
-    printfn "1. Add Flash Card"
-    printfn "2. View Flash Cards"
-    printfn "3. Start Learning"
-    printfn "4. Exit"
-    printfn "================================\n\n"
+    printfn "\n\n================================
+🚀 Main Menu, please make a choice
+Options:
+0. Instructions
+1. Add Flash Card
+2. View Flash Cards
+3. Start Learning
+4. Exit
+================================\n\n"
 
 let printInstructions() =
     printfn "\nInstructions:"
@@ -59,55 +39,48 @@ let printWelcomeMessage() =
  / /|  /  __/ /  / /_/ / /_/ /  __/ /__/ ,<   
 /_/ |_/\___/_/   \__,_/_____/\___/\___/_/|_|  
 """
-    printfn "\nWelcome to\n%s" nerdDeckASCII
+    printfn $"\nWelcome to\n%s{nerdDeckASCII}"
     printfn "Developed by Maximilian Gobbel"
     printfn "If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck"
     printfn "For the best experience go full screen mode."
     printfn "This program is written in F#."
 
 
-let getUserInput(prompt: string) =
+let getUserInput(prompt: string) : string =
     printf $"%s{prompt}"
     Console.ReadLine().Trim()
 
-let addFlashCard(cards: FlashCard list) =
+
+let createNewFlashCard(cards: FlashCardDeck) : FlashCardDeck =
     let question = getUserInput("Question: ")
     let answer = getUserInput("Answer: ")
 
-    let newCard = {
-        ID = Guid.NewGuid().ToString()
-        Question = question
-        Answer = answer
-        Repetitions = 0
-        EFactor = 2.5
-        NextReview = DateTime.Now
-    }
-
-    let updatedCards = newCard :: cards
-    match saveFlashCards updatedCards with
+    let updatedDeck = addFlashCard question answer cards    
+    
+    match saveFlashCards updatedDeck with
         | Ok _ -> printfn "Flash card added successfully!"; cards
-        | Error err -> printfn "Error saving flashcards: %s" err.Message; cards
+        | Error err -> printfn $"Error saving flashcards: %s{err.Message}"; cards
 
-let viewFlashCards(cards: FlashCard list) =
+let viewFlashCards(cards: FlashCardDeck) =
     if List.isEmpty cards then
         printfn "No flash cards available. Add some cards first."
     else
         cards
-        |> List.iteri (fun i card -> printfn "%d. Q: %s\n   A: %s\n" (i+1) card.Question card.Answer)
+        |> List.iteri (fun i card -> printfn $"%d{i+1}. Q: %s{card.Question}\n   A: %s{card.Answer}\n")
     cards
 
-let startLearning(cards: FlashCard list) =
+let startLearning(cards: FlashCardDeck) : FlashCardDeck =
     printfn "Not implemented yet."
     cards
 
-let rec mainLoop(cards: FlashCard list) =
+let rec mainLoop(cards: FlashCardDeck) : unit =
     printMainMenu()
 
     let option = getUserInput("Select an option: ")
 
     match option with
     | "0" -> printInstructions(); cards |> mainLoop
-    | "1" -> cards |> addFlashCard |> mainLoop
+    | "1" -> cards |> createNewFlashCard |> mainLoop
     | "2" -> cards |> viewFlashCards |> mainLoop
     | "3" -> cards |> startLearning |> mainLoop
     | "4" -> printfn "\n\n================================"; printfn "Exiting NerdDeck. Goodbye!";
@@ -118,4 +91,4 @@ printWelcomeMessage()
 printMainMenu()
 match loadFlashCards() with
     | Ok cards -> mainLoop cards
-    | Error ex -> printfn "Error loading flashcards: %s" (ex.Message)
+    | Error ex -> printfn $"Error loading flashcards: %s{ex.Message}"
