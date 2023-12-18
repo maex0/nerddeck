@@ -51,5 +51,3 @@ printMainMenu()
 match loadFlashCards() with
     | Ok cards -> printfn "Loaded %d flashcards." (List.length cards)
     | Error ex -> printfn "Error loading flashcards: %s" (ex.Message)
-
-asdfsl
