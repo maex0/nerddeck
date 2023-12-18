@@ -17,4 +17,4 @@ jobs:
           dotnet-version: '7.0.x'
       - name: Build F#
         run: dotnet build
-        working-directory: ${{ github.workspace }}/fsharp
+        working-directory: ${{ github.workspace }}/fsharp/NerdDeckFSharp
