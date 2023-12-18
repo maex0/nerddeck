@@ -1,15 +1,8 @@
 ﻿open System
 open System.IO
 open System.Text.Json
+open Library
 
-type FlashCard = {
-    ID: string
-    Question: string
-    Answer: string
-    Repetitions: int
-    EFactor: float
-    NextReview: DateTime
-}
 
 let flashcardsFile = "flashcards.json"
 
@@ -20,6 +13,15 @@ let loadFlashCards() =
         Ok cards
     with
     | :? FileNotFoundException -> Ok []
+    | ex -> Error ex
+
+let saveFlashCards (cards: FlashCard list) =
+    try
+        let options = JsonSerializerOptions(WriteIndented = true)
+        let file = JsonSerializer.Serialize(cards, options)
+        File.WriteAllText(flashcardsFile, file)
+        Ok ()
+    with
     | ex -> Error ex
 
 let printMainMenu() =
@@ -65,8 +67,38 @@ let printWelcomeMessage() =
 
 
 let getUserInput(prompt: string) =
-    printf "%s" prompt
+    printf $"%s{prompt}"
     Console.ReadLine().Trim()
+
+let addFlashCard(cards: FlashCard list) =
+    let question = getUserInput("Question: ")
+    let answer = getUserInput("Answer: ")
+
+    let newCard = {
+        ID = Guid.NewGuid().ToString()
+        Question = question
+        Answer = answer
+        Repetitions = 0
+        EFactor = 2.5
+        NextReview = DateTime.Now
+    }
+
+    let updatedCards = newCard :: cards
+    match saveFlashCards updatedCards with
+        | Ok _ -> printfn "Flash card added successfully!"; cards
+        | Error err -> printfn "Error saving flashcards: %s" err.Message; cards
+
+let viewFlashCards(cards: FlashCard list) =
+    if List.isEmpty cards then
+        printfn "No flash cards available. Add some cards first."
+    else
+        cards
+        |> List.iteri (fun i card -> printfn "%d. Q: %s\n   A: %s\n" (i+1) card.Question card.Answer)
+    cards
+
+let startLearning(cards: FlashCard list) =
+    printfn "Not implemented yet."
+    cards
 
 let rec mainLoop(cards: FlashCard list) =
     printMainMenu()
@@ -74,12 +106,13 @@ let rec mainLoop(cards: FlashCard list) =
     let option = getUserInput("Select an option: ")
 
     match option with
-    | "0" -> printInstructions(); mainLoop cards
-    | "1" -> printfn "Selected option 1"; mainLoop cards
-    | "2" -> printfn "Selected option 2"; mainLoop cards
-    | "3" -> printfn "Selected option 3"; mainLoop cards
+    | "0" -> printInstructions(); cards |> mainLoop
+    | "1" -> cards |> addFlashCard |> mainLoop
+    | "2" -> cards |> viewFlashCards |> mainLoop
+    | "3" -> cards |> startLearning |> mainLoop
     | "4" -> printfn "\n\n================================"; printfn "Exiting NerdDeck. Goodbye!";
     | _ -> printfn "Invalid option. Please try again."; mainLoop cards
+
 
 printWelcomeMessage()
 printMainMenu()

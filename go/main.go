@@ -71,6 +71,7 @@ func printWelcomeMessage() {
 	fmt.Println("Developed by Maximilian Gobbel")
 	fmt.Println("If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck")
 	fmt.Println("For the best experience go full screen mode.")
+	fmt.Println("This program is written in Go.")
 }
 
 func printInstructions() {
