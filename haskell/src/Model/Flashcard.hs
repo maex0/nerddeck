@@ -9,16 +9,15 @@ module Model.Flashcard
     , initialInterval
     ) where
 
-import Model.Deck
+import Data.Time (UTCTime)
 
 data Flashcard = Flashcard
     { flashcardId :: Int
     , question :: String
     , answer :: String
-    , interval :: Int
-    , ease :: Ease
-    , reviewDate :: Int -- todo: This should be a real date later
-    , deck :: Deck
+    , repetitions :: Int
+    , efactor :: Ease
+    , nextReview :: UTCTime
     } deriving (Show)
 
 data Ease = Ease1 | Ease2 | Ease3 | Ease4 | Ease5 deriving (Show)
@@ -37,13 +36,13 @@ easeLevel e = case e of
     Ease5 -> 5
 
 presentFlashcard :: Flashcard -> Flashcard
-presentFlashcard card = card { interval = 1 }
+presentFlashcard card = card { repetitions = 1 }
 
 reviewFlashcard :: Flashcard -> Bool -> Flashcard
 reviewFlashcard card success =
     if success
-        then card { interval = nextInterval (interval card) }
-        else card { interval = 1 }
+        then card { repetitions = nextInterval (repetitions card) }
+        else card { repetitions = 1 }
 
 nextInterval :: Int -> Int
 nextInterval currentInterval = currentInterval * 2
@@ -54,3 +53,10 @@ addToDeck deck card = card : deck
 reviewDeck :: FlashcardDeck -> Bool -> FlashcardDeck
 reviewDeck deck success = map (\card -> reviewFlashcard card success) deck
 
+convertGrade :: String -> Int
+convertGrade grade = case grade of
+    "1" -> 1
+    "2" -> 2
+    "3" -> 3
+    "4" -> 4
+    _ -> 1

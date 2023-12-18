@@ -3,5 +3,4 @@ module SM2
     ) where
 
 import Model.Flashcard
-import Model.Deck
 

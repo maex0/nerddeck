@@ -3,9 +3,9 @@ module Main where
 import System.Exit (exitSuccess)
 import Data.Char (ord)
 import Model.Flashcard
-import Model.Deck
 import Model.Session
 import SM2
+import Data.Time.Clock
 
 import Data.Char (ord)
 
@@ -40,15 +40,15 @@ handleMenuOption 1 deck = do
     question <- getLine
     putStrLn "Enter the answer: "
     answer <- getLine
+    currentTime <- getCurrentTime
 
     let newCard = Flashcard
             { flashcardId = length deck + 1
             , question = question
             , answer = answer
-            , interval = initialInterval
-            , ease = Ease1
-            , reviewDate = 0
-            , deck = Deck 1 "Math"
+            , repetitions = initialInterval
+            , efactor = Ease1
+            , nextReview = addUTCTime (24 * 60 * 60) currentTime
             }
     let updatedDeck = addToDeck deck newCard
     putStrLn "Flash card added successfully!" 
