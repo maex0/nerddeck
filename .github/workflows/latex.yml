@@ -1,6 +1,10 @@
 name: Build- and Releasescript for paper written in LaTeX
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - docs/**
+
 jobs:
   build_latex:
     name: Compile LaTeX
