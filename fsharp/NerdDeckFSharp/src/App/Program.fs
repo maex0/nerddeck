@@ -1,4 +1,28 @@
-﻿let printMainMenu() =
+﻿open System
+open System.IO
+open System.Text.Json
+
+type FlashCard = {
+    ID: string
+    Question: string
+    Answer: string
+    Repetitions: int
+    EFactor: float
+    NextReview: DateTime
+}
+
+let flashcardsFile = "flashcards.json"
+
+let loadFlashCards() =
+    try
+        let file = File.ReadAllText(flashcardsFile)
+        let cards = JsonSerializer.Deserialize<FlashCard list>(file)
+        Ok cards
+    with
+    | :? FileNotFoundException -> Ok []
+    | ex -> Error ex
+
+let printMainMenu() =
     printfn "\n\n================================"
     printfn "Main Menu:"
     printfn "0. Instructions"
@@ -24,3 +48,6 @@ let printWelcomeMessage() =
 
 printWelcomeMessage()
 printMainMenu()
+match loadFlashCards() with
+    | Ok cards -> printfn "Loaded %d flashcards." (List.length cards)
+    | Error ex -> printfn "Error loading flashcards: %s" (ex.Message)
