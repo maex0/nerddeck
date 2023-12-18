@@ -42,7 +42,7 @@ let convertGrade (grade: string) : int =
         printfn $"Invalid grade. Using default grade {defaultGrade}."
         defaultGrade
 
-let calculateNewEFactor (oldEFactor: float) (grade: int) : float =
+let calculateNewEFactor oldEFactor grade =
     oldEFactor + 0.1 - (5.0 - float grade) * (0.08 + (5.0 - float grade) * 0.02)
 
 let applySM2Algorithm card grade =
