@@ -1,2 +1,26 @@
-﻿// For more information see https://aka.ms/fsharp-console-apps
-printfn "Hello from F#"
+﻿let printMainMenu() =
+    printfn "\n\n================================"
+    printfn "Main Menu:"
+    printfn "0. Instructions"
+    printfn "1. Add Flash Card"
+    printfn "2. View Flash Cards"
+    printfn "3. Start Learning"
+    printfn "4. Exit"
+    printfn "================================\n\n"
+
+let printWelcomeMessage() =
+    let nerdDeckASCII =
+        """
+    _   __              ______            __  
+   / | / /__  _________/ / __ \___  _____/ /__
+  /  |/ / _ \/ ___/ __  / / / / _ \/ ___/ //_/
+ / /|  /  __/ /  / /_/ / /_/ /  __/ /__/ ,<   
+/_/ |_/\___/_/   \__,_/_____/\___/\___/_/|_|  
+"""
+    printfn "\nWelcome to\n%s" nerdDeckASCII
+    printfn "Developed by Maximilian Gobbel"
+    printfn "If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck"
+    printfn "For the best experience go full screen mode."
+
+printWelcomeMessage()
+printMainMenu()
