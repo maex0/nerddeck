@@ -4,8 +4,7 @@ open File
 
 
 
-let printMainMenu() =
-    printfn "\n\n================================
+let printMainMenu() = printfn "\n\n=====================================
 🚀 Main Menu, please make a choice
 Options:
 0. Instructions
@@ -13,7 +12,7 @@ Options:
 2. View Flash Cards
 3. Start Learning
 4. Exit
-================================\n\n"
+=====================================\n\n"
 
 let printInstructions() =
     printfn "\nInstructions:"
@@ -58,8 +57,8 @@ let createNewFlashCard(cards: FlashCardDeck) : FlashCardDeck =
     let updatedDeck = addFlashCard question answer cards    
     
     match saveFlashCards updatedDeck with
-        | Ok _ -> printfn "Flash card added successfully!"; cards
-        | Error err -> printfn $"Error saving flashcards: %s{err.Message}"; cards
+        | Ok _ -> printfn "Flash card added successfully!"; updatedDeck
+        | Error err -> printfn $"Error saving flashcards: %s{err.Message}"; updatedDeck
 
 let viewFlashCards(cards: FlashCardDeck) =
     if List.isEmpty cards then
@@ -70,8 +69,36 @@ let viewFlashCards(cards: FlashCardDeck) =
     cards
 
 let startLearning(cards: FlashCardDeck) : FlashCardDeck =
-    printfn "Not implemented yet."
-    cards
+   if List.isEmpty cards then
+        printfn "No flash cards available. Add some cards first."
+        cards
+   else
+        // Check for due flashcards based on the current date
+        let dueFlashcards = getDueFlashCards cards
+
+        if List.isEmpty dueFlashcards then
+            printfn "No flashcards are due for review today."; cards
+        else
+            printfn "Due Flash Cards:"
+            printfn "Starting Learning Mode. You got this :)"
+            dueFlashcards
+            |> List.fold (fun updatedCards dueCard ->
+                match findCardByID cards dueCard.ID with
+                | Some card ->
+                    printfn $"Q: %s{card.Question}\n"
+                    let _ = getUserInput("Press Enter to reveal the answer...")
+                    printfn $"A: %s{card.Answer}\n\n"
+
+                    let grade = getUserInput("How well did you remember this card 1-4\n")
+                    let updatedCard = applySM2Algorithm card grade
+                    // Replace the old card with the updated one
+                    let updatedCards = List.map (fun c -> if c.ID = updatedCard.ID then updatedCard else c) updatedCards
+                    
+                    match saveFlashCards updatedCards with
+                    | Ok _ -> updatedCards
+                    | Error err -> printfn $"Error saving flashcards: %s{err.Message}"; updatedCards
+                | None -> updatedCards
+            ) cards
 
 let rec mainLoop(cards: FlashCardDeck) : unit =
     printMainMenu()
