@@ -2,8 +2,6 @@
 open FlashCard
 open File
 
-
-
 let printMainMenu () =
     let menu =
         "\n\n=====================================\n"
@@ -55,10 +53,9 @@ let printWelcomeMessage () =
 
     printfn $"%s{welcomeMessage}"
 
-let getUserInput (prompt: string) : string =
+let getUserInput prompt =
     printf $"%s{prompt}"
     Console.ReadLine().Trim()
-
 
 let createNewFlashCard (cards: FlashCardDeck) : FlashCardDeck =
     let updatedDeck =
@@ -93,8 +90,7 @@ let startLearning (cards: FlashCardDeck) : FlashCardDeck =
             printfn "No flashcards are due for review today."
             cards
         else
-            printfn "Due Flash Cards:"
-            printfn "Starting Learning Mode. You got this :)"
+            printfn "Due Flash Cards:\nStarting Learning Mode. You got this :)"
 
             dueFlashcards
             |> List.fold
@@ -102,10 +98,10 @@ let startLearning (cards: FlashCardDeck) : FlashCardDeck =
                     match findCardByID cards dueCard.ID with
                     | Some card ->
                         printfn $"Q: %s{card.Question}\n"
-                        let _ = getUserInput ("Press Enter to reveal the answer...")
+                        let _ = "Press Enter to reveal the answer..." |> getUserInput
                         printfn $"A: %s{card.Answer}\n\n"
 
-                        let grade = getUserInput ("How well did you remember this card 1-4\n")
+                        let grade = "How well did you remember this card 1-4\n" |> getUserInput 
                         let updatedCard = applySM2Algorithm card grade
                         // Replace the old card with the updated one
                         let updatedCards =
@@ -122,7 +118,7 @@ let startLearning (cards: FlashCardDeck) : FlashCardDeck =
 let rec mainLoop (cards: FlashCardDeck) : unit =
     printMainMenu ()
 
-    let option = getUserInput ("Select an option: ")
+    let option = "Select an option: " |> getUserInput
 
     match option with
     | "0" ->
@@ -131,13 +127,10 @@ let rec mainLoop (cards: FlashCardDeck) : unit =
     | "1" -> cards |> createNewFlashCard |> mainLoop
     | "2" -> cards |> viewFlashCards |> mainLoop
     | "3" -> cards |> startLearning |> mainLoop
-    | "4" ->
-        printfn "\n\n================================"
-        printfn "Exiting NerdDeck. Goodbye!"
+    | "4" -> printfn "\n\n================================\nExiting NerdDeck. Goodbye!"
     | _ ->
         printfn "Invalid option. Please try again."
         mainLoop cards
-
 
 printWelcomeMessage ()
 
