@@ -5,34 +5,34 @@ open File
 
 
 let printMainMenu () =
-    let menu = 
-        "\n\n=====================================\n" +
-        "🚀 Main Menu, please make a choice\n" +
-        "Options:\n" +
-        "0. Instructions\n" +
-        "1. Add Flash Card\n" +
-        "2. View Flash Cards\n" +
-        "3. Start Learning\n" +
-        "4. Exit\n" +
-        "=====================================\n\n"
+    let menu =
+        "\n\n=====================================\n"
+        + "🚀 Main Menu, please make a choice\n"
+        + "Options:\n"
+        + "0. Instructions\n"
+        + "1. Add Flash Card\n"
+        + "2. View Flash Cards\n"
+        + "3. Start Learning\n"
+        + "4. Exit\n"
+        + "=====================================\n\n"
 
     printfn $"%s{menu}"
 
 let printInstructions () =
-    let instructions = 
-        "\nInstructions:\n" +
-        "1. Add Flash Card: Enter a question and answer to create a new flash card.\n" +
-        "2. View Flash Cards: Display all existing flash cards.\n" +
-        "3. Start Learning: Review flash cards that are due for learning today.\n" +
-        "   - Press Enter to reveal the answer.\n" +
-        "   - Rate your memory from 1 to 4:\n" +
-        "     - 1: I don't remember at all. :(\n" +
-        "     - 2: I remember a little.     :|\n" +
-        "     - 3: I remember well.         :)\n" +
-        "     - 4: I remember perfectly.    :D\n" +
-        "   - The SM2 spaced repetition algorithm will adjust the card's review interval.\n" +
-        "4. Exit: Save flash cards and exit the application.\n" +
-        "================================\n\n"
+    let instructions =
+        "\nInstructions:\n"
+        + "1. Add Flash Card: Enter a question and answer to create a new flash card.\n"
+        + "2. View Flash Cards: Display all existing flash cards.\n"
+        + "3. Start Learning: Review flash cards that are due for learning today.\n"
+        + "   - Press Enter to reveal the answer.\n"
+        + "   - Rate your memory from 1 to 4:\n"
+        + "     - 1: I don't remember at all. :(\n"
+        + "     - 2: I remember a little.     :|\n"
+        + "     - 3: I remember well.         :)\n"
+        + "     - 4: I remember perfectly.    :D\n"
+        + "   - The SM2 spaced repetition algorithm will adjust the card's review interval.\n"
+        + "4. Exit: Save flash cards and exit the application.\n"
+        + "================================\n\n"
 
     printfn $"%s{instructions}"
 
@@ -46,12 +46,12 @@ let printWelcomeMessage () =
 /_/ |_/\___/_/   \__,_/_____/\___/\___/_/|_|  
 """
 
-    let welcomeMessage = 
-        $"\nWelcome to\n{nerdDeckASCII}\n" +
-        "Developed by Maximilian Gobbel\n" +
-        "If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck\n" +
-        "For the best experience go full screen mode.\n" +
-        "This program is written in F#."
+    let welcomeMessage =
+        $"\nWelcome to\n{nerdDeckASCII}\n"
+        + "Developed by Maximilian Gobbel\n"
+        + "If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck\n"
+        + "For the best experience go full screen mode.\n"
+        + "This program is written in F#."
 
     printfn $"%s{welcomeMessage}"
 
@@ -61,10 +61,8 @@ let getUserInput (prompt: string) : string =
 
 
 let createNewFlashCard (cards: FlashCardDeck) : FlashCardDeck =
-    let question = getUserInput ("Question: ")
-    let answer = getUserInput ("Answer: ")
-
-    let updatedDeck = addFlashCard question answer cards
+    let updatedDeck =
+        cards |> addFlashCard (getUserInput "Question: ") (getUserInput "Answer: ")
 
     match saveFlashCards updatedDeck with
     | Ok _ ->
