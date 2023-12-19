@@ -2,11 +2,11 @@
 
 ![Build Status](https://github.com/maex0/nerddeck/actions/workflows/build.yml/badge.svg)
 
-Welcome to NerdDeck, a project initiated during the first semester of my Master's program at [TH Rosenheim](https://www.th-rosenheim.de) in the course "Concepts of Programming Languages." In this project, I will be comparing two programming languages, [Go](https://go.dev) and [Haskell](https://www.haskell.org), within the context of functional programming.
+Welcome to NerdDeck, a project initiated during the first semester of my Master's program at [TH Rosenheim](https://www.th-rosenheim.de) in the course "Concepts of Programming Languages." In this project, I will be comparing two programming languages, [Go](https://go.dev) and [F#](https://dotnet.microsoft.com/languages/fsharp), within the context of functional programming.
 
 ## Project Overview
 
-This repository is dedicated to exploring the paradigms of functional programming in the context of two distinct programming languages: Go and Haskell.
+This repository is dedicated to exploring the paradigms of functional programming in the context of two distinct programming languages: Go and F#.
 
 ## Table of Contents
 
@@ -18,14 +18,14 @@ This repository is dedicated to exploring the paradigms of functional programmin
   - [Database Schema](#database-schema)
 - [Model](#Model)
 - [Functional Programming in Go](#functional-programming-in-go)
-- [Functional Programming in Haskell](#functional-programming-in-haskell)
+- [Functional Programming in F#](#functional-programming-in-fsharp)
 - [Examples](#examples)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Goals
 
-- Compare and contrast the key features of Go and Haskell as functional programming languages.
+- Compare and contrast the key features of Go and F# as functional programming languages.
 - Provide practical examples and use cases to demonstrate the strengths and weaknesses of each language.
 - Implement the spaced repetition algorithm SM-2. Information about this algorithm can be found [here](https://www.supermemo.com/en/blog/application-of-a-computer-to-improve-the-results-obtained-in-working-with-the-supermemo-method)
 
