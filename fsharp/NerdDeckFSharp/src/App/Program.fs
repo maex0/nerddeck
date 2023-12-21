@@ -6,7 +6,6 @@ let printMainMenu () =
     let menu =
         "\n\n=====================================\n"
         + "🚀 Main Menu, please make a choice\n"
-        + "Options:\n"
         + "0. Instructions\n"
         + "1. Add Flash Card\n"
         + "2. View Flash Cards\n"
@@ -45,11 +44,11 @@ let printWelcomeMessage () =
 """
 
     let welcomeMessage =
-        $"\nWelcome to\n{nerdDeckASCII}\n"
+        $"\nWelcome to{nerdDeckASCII}\n"
         + "Developed by Maximilian Gobbel\n"
         + "If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck\n"
-        + "For the best experience go full screen mode.\n"
-        + "This program is written in F#."
+        + "For the best experience go full screen mode\n"
+        + "This program is written in F#"
 
     printfn $"%s{welcomeMessage}"
 

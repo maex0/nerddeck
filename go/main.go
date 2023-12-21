@@ -67,7 +67,7 @@ func printWelcomeMessage() {
  / /|  /  __/ /  / /_/ / /_/ /  __/ /__/ ,<   
 /_/ |_/\___/_/   \__,_/_____/\___/\___/_/|_|  
 `
-	fmt.Println("\nWelcome to\n", nerdDeckASCII)
+	fmt.Println("\nWelcome to", nerdDeckASCII)
 	fmt.Println("Developed by Maximilian Gobbel")
 	fmt.Println("If you want to know more about NerdDeck, visit https://github.com/maex0/nerddeck")
 	fmt.Println("For the best experience go full screen mode.")
