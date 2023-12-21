@@ -11,7 +11,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
     In addition to Go, a second programming language is essential for the comparative analysis, and F\# has been selected for this purpose. The decision to include F\# in this study is based on the author's deliberate choice, and the relationale behind this decision is elucidated in the subsequent section \ref{sec:whyfsharp}. By juxtaposing Go and F\#, the project aims to unravel the nuances and divergences in their approaches to \ac{fp} paradigms, shedding light on their distinctive features, strengths, and potential use cases. Through this comparative exploration, the project seeks to contribute valuable insights into the \ac{fp} landscape, providing a nuanced understanding of the strengths and trade-offs associated with these two languages.
 
     \section{Why F\#?}\label{sec:whyfsharp}
-    One of the key reasons for choosing F\# is its status as a F\# programming language. In contrast to Go's multi-paradigm approach, F\#'s commitment to functional principles provides an excellent opportunity to explore the benefits of implementing code from a pure perspective.
+    One of the key reasons for choosing F\# is its status as a functional-first programming language. In contrast to Go's multi-paradigm approach, F\#'s commitment to functional principles provides an excellent opportunity to explore the benefits of implementing code from a pure perspective.
     For a more in-depth understanding of F\#, including its syntax, features, and \ac{fp} principles, readers are encouraged to refer to section \ref{sec:fsharp-overview}.
 
     \section{Roadmap}\label{sec:roadmap}
@@ -159,16 +159,20 @@ In this chapter, we delve into the distinctive features of Go and F\#, offering 
     \section{Overview of Go}\label{sec:go-overview}
     The usage of the programming language Go allows to build simple, secure and scalable systems. It is used very widely within big companys like Google, Paypal or Netflix. Besides of that it is open source. \cite{GoWebsite}
     \section{Overview of F\#}\label{sec:fsharp-overview}
-
-
-    \section{Comparative Analysis}\label{sec:comparative-analysis}
-
-
+    F\# is a functional-first programming language
+    Besides C\# and Visual Basic, F\# is third programming language within the .NET ecosystem. On the official website of microsoft it is delared as an open-source language that makes it easy to write succinct, robust, and performant code. Microsoft names itself as a leading contributor. Because F\# is part of the .NET system of microsoft it offers a lot of advantages like the interoperability with the other languages. This means it is easy to execute C\# code from F\# code and vice verca. It is also possible to access .NET Libraries and APIs (e.g. ASP.NET or Entity Framework). F\# has an active community and support. While developing, F\# has a very powerful build-in future called \ac{repl}.
+\cite{dotnet}
+f
 \chapter{Comparison of functional concepts}
+In order to compare the two languages, the following two functional concepts are examined in more detail: Algebraic Data Types and Pattern Matching. Both of the languages are not completely pure like for example Haskell\footnote{Website: \url{https://www.haskell.org} (Accessed on 12/20/2023)}.
     \section{Algebraic Data Types}\label{sec:algebraic-data-types}
+    In F\# there are two types of algebraic data types: record types and discriminated unions. In Nerddeck a record type is used to model a flashcard and the flashcard deck. 
     \section{Pattern Matching}\label{sec:pattern-matching}
+    Pattern Matching works perfectly when you already have algebraic data types inside your programming language.
+
 
 \chapter{Conclusion}\label{chap:conclusion}
     \section{Challenges}\label{sec:challenges}
+    The foundation of a good comparision in the context of this paper is to write code as pure as possible to fulfill the paradigm of functional programming. Since Go and also F\# is not completely pure...
     \section{Summary of Findings}\label{sec:findings-summary}
     \section{Lessons Learned}\label{sec:lessons-learned}
