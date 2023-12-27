@@ -1,26 +1,27 @@
 \chapter{Introduction}\label{chap:introduction}
-This paper is written for the master course \textit{Concepts of Programming Languages} of the apartment of computer science in the Winter Term 23/24 at the Technical University of Applied Sciences Rosenheim.
+This paper is written for the master course \textit{Concepts of Programming Languages} of the department of computer science in the Winter Term 23/24 at the Technical University of Applied Sciences Rosenheim.
     \section{Background}\label{sec:background}
-As of the TIOBE Index data as of November 2023, it is reported that there are currently over 150 programming languages in existence. This implies that, up until the present moment, the programming landscape continues to encompass a diverse array of languages, reflecting the dynamic and ever-evolving nature of the field.\cite{tiobeindex} The task of a programmer at a certain point in the production of software is to select one of these programming languages that is suitable for a particular problem. This can be a science in itself. This very topic has been discussed for around 50 years.\cite{Tharp1982}
+As of the TIOBE Index data as of November 2023, it is reported that there are currently over 150 programming languages in existence. This implies that, up until the present moment, the programming landscape continues to encompass a diverse array of languages, reflecting the dynamic and ever-evolving nature of the field.\cite{tiobeindex} The task of a software engineer at a certain point in the production of software is to select one of these programming languages that is suitable for a particular problem. This can be a science in itself. This very topic has been discussed for around 50 years.\cite{Tharp1982}
 The reason for that is that every language has its own paradigms and concepts. One can come up with a solution, selecting a language which fits a lot of problems but not a single one perfect. Or he selects one which fits perfect for a single problem but it is not possible to solve all the other problems.
 So the goal would be to select the \textit{right} programming language which suits the requirements and the surrounding of a given problem accordingly.
 This spot should be covered by this paper with the comparison of Go and F\# in the context of \ac{fp}.
 
     \section{Purpose of the Project}\label{sec:purpose}
-    The primary objective of this project is to analyse and explore the distinction and similarities between two languages within the realm of \ac{fp}. The selected languages for this comparative study are Go\footnote{Website: \url{https://go.dev} (Accessed on 12/02/2023)} and F\#\footnote{Website: \url{https://dotnet.microsoft.com/languages/fsharp} (Accessed on 12/02/2023)}. Go was chosen as the initial language due to its consistent usage throughout the course, making it mandatory inclusion in the project. 
-    In addition to Go, a second programming language is essential for the comparative analysis, and F\# has been selected for this purpose. The decision to include F\# in this study is based on the author's deliberate choice, and the relationale behind this decision is elucidated in the subsequent section \ref{sec:whyfsharp}. By juxtaposing Go and F\#, the project aims to unravel the nuances and divergences in their approaches to \ac{fp} paradigms, shedding light on their distinctive features, strengths, and potential use cases. Through this comparative exploration, the project seeks to contribute valuable insights into the \ac{fp} landscape, providing a nuanced understanding of the strengths and trade-offs associated with these two languages.
+    The object of this project is to analyze and compare the similarities and differences between two functional programming languages. The selected languages for this comparative study are Go\footnote{Website: \url{https://go.dev} (Accessed on 12/02/2023)} and F\#\footnote{Website: \url{https://dotnet.microsoft.com/languages/fsharp} (Accessed on 12/02/2023)}. Go was chosen as the initial language due to its consistent usage throughout the course, making it mandatory inclusion in the project. 
+    In addition to Go, a second programming language is essential for the comparative analysis, and F\# has been selected for this purpose. The inclusion of F\# in this study was a deliberate choice, as explained in section 
+    ef{sec:whyfsharp}. By juxtaposing Go and F\#, the project aims to unravel the nuances and divergences in their approaches to \ac{fp} paradigms, shedding light on their distinctive features, strengths, and potential use cases. Through this comparative exploration, the project seeks to contribute valuable insights into the \ac{fp} landscape, providing a nuanced understanding of the strengths and trade-offs associated with these two languages.
 
     \section{Why F\#?}\label{sec:whyfsharp}
     One of the key reasons for choosing F\# is its status as a functional-first programming language. In contrast to Go's multi-paradigm approach, F\#'s commitment to functional principles provides an excellent opportunity to explore the benefits of implementing code from a pure perspective.
     For a more in-depth understanding of F\#, including its syntax, features, and \ac{fp} principles, readers are encouraged to refer to section \ref{sec:fsharp-overview} and chapter \ref{chap:comparison}.
 
     \section{Roadmap}\label{sec:roadmap}
-    Embedded within this exploration about \ac{fp} is a brief discussion of the \textit{NerdDeck} Flash Card \ac{app} in chapter 2, our practical context for understanding \ac{fp} in action. Besides of that this paper navigates a concise roadmap to compare \ac{fp} in Go and F\#, anchored by an initial overview of \ac{fp} principles in chapter 3. It then swiftly transitions to individual language analyses in chapter 4, spotlighting key design philosophies and features of Go and F\#. The centerpiece is chapter 5, a focused exploration of two critical functional concepts: Algebraic Data Types and Pattern Matching. Leveraging code examples, this section illuminates nuances in implementation, providing a succinct yet insightful comparative analysis. The paper concludes in chapter 6, summarizing challenges, key findings, and lessons learned from both the project and the comparative analysis. This streamlined roadmap ensures a comprehensive yet condensed examination of \ac{fp} in Go and F\#.
+    Embedded within this exploration about \ac{fp} is a brief discussion of the \textit{NerdDeck} Flash Card \ac{app} in chapter 2, our practical context for understanding \ac{fp} in action. Besides of that this paper navigates a concise roadmap to compare \ac{fp} in Go and F\#, anchored by an initial overview of \ac{fp} principles in chapter 3. It then swiftly transitions to individual language analyses in chapter 4, spotlighting key design philosophies and features of Go and F\#. The centerpiece is chapter 5, a focused exploration of two critical functional concepts: Algebraic Data Types and First-class Functions. Leveraging code examples, this section illuminates nuances in implementation, providing a succinct yet insightful comparative analysis. The paper concludes in chapter 6, summarizing challenges and outlook from both the project and the comparison. This streamlined roadmap ensures a comprehensive yet condensed examination of \ac{fp} in Go and F\#.
 
 \chapter{Project Overview}\label{chap:project-overview}
     \section{Description of the \textit{NerdDeck} Flash Card Application}\label{sec:description}
     This coding project should illustrate and highlight similarities and differences about \ac{fp} in Go versus F\#.
-    \textit{NerdDeck} is app which can help remembering things with flashcards. There exists already such a product called Anki\footnote{Website: \url{https://apps.ankiweb.net} (Accessed on 12/03/2023)} for the same usecase. Most parts of Anki are written in Rust and Python.\footnote{Website: \url{https://github.com/ankitects/anki} (Accessed on 12/03/2023)} The difference in \textit{NerdDeck} is that it is written twice, each time in a different programming language, Go and F\#, and the \ac{fp} paradigma should be used. In F\# there will be no problem as it will turn out in section \ref{sec:fsharp-overview} because it is possible to write functional-first code. But as Go is a impure language, the goal is to write it as functional as possible. In addition to that, \textit{NerdDeck} should just use the \ac{cli} as a \ac{gui} while Anki has a own one.
+    \textit{NerdDeck} is app which can help remembering things with flashcards. There exists already such a product called Anki\footnote{Website: \url{https://apps.ankiweb.net} (Accessed on 12/03/2023)} for the same use case. Most parts of Anki are written in Rust and Python.\footnote{Website: \url{https://github.com/ankitects/anki} (Accessed on 12/03/2023)} The difference in \textit{NerdDeck} is that it is written twice, each time in a different programming language, Go and F\#, and the \ac{fp} paradigm should be used. In F\# there will be no problem as it will turn out in section \ref{sec:fsharp-overview} because it is possible to write functional-first code. But as Go is a impure language, the goal is to write it as functional as possible. In addition to that, \textit{NerdDeck} should just use the \ac{cli} as a \ac{gui} while Anki has a own one.
 
     \section{Requirements}
      The \ac{app} should allow a single user to use the \ac{sm2} alorithm which is used for spaced repetition.\cite{sm2} One of Anki's algroithms is also based on \ac{sm2}.\footnote{Website: \url{https://faqs.ankiweb.net/what-spaced-repetition-algorithm.html} (Accessed on 12/03/2023)} Because \textit{NerdDeck} is build by a student, the requirements are also written from a students perspective. The requirements are written down in table \ref{tab:requirements}. These should not differ too big from other users using this application. The goal is to implement this twice, one time in Go and then in F\#, both in a functional style. The program should act as a \ac{mvp}, so it's possible to do the comparison about \ac{fp}. Because of that and to reduce the complexity, only one deck exists where a user can add new flashcards. They can not be deleted.
@@ -41,21 +42,19 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
             5 & As a student, I want to apply a spaced repetition algorithm to learn with the flashcards. \\
             \hline
         \end{tabular}
-        \caption{\textit{NerdDeck} Requirements}
-        \label{tab:requirements}
+        \caption{\textit{NerdDeck} Requirements}\label{tab:requirements}
     \end{table}
 
     \section{Data}
     For the purpose of this project, a single \ac{json} file is used as a simple and lightweight database to store flashcards. For example in the \ac{json} object in listing \ref{l:flashcardjson}. While this approach is suitable for educational and illustrative purposes, it may not be suitable for production usage due to limitations in scalability and concurrent access. In a production environment, a more robust database solution should be considered, such as a relational database (e.g., PostgreSQL\footnote{Website: \url{https://www.postgresql.org} (Accessed on 12/02/2023)}, MySQL\footnote{Website: \url{https://www.mysql.com} (Accessed on 12/02/2023)}) or a NoSQL database (e.g., MongoDB\footnote{Website: \url{https://www.mongodb.com} (Accessed on 12/02/2023)}). The choice of the database will depend on the specific requirements of the \ac{app}.
 
     \subsection{Model}
-    To be able to fulifll the requirements of table \ref{tab:requirements} a model is needed for a flashcard. These are shown in figure \ref{fig:model}. It is important that allow a user to create multiple flashcards and validate that there is no flashcard with a duplicate question and answer. The ID is generated from the question and answer of the flashcard. This ID acts like a primary key for the model. This model should be used within both languages.
+    To be able to fulfill the requirements of table \ref{tab:requirements} a model is needed for a flashcard. These are shown in figure \ref{fig:model}. It is important that allow a user to create multiple flashcards and validate that there is no flashcard with a duplicate question and answer. The ID is generated from the question and answer of the flashcard. This ID acts like a primary key for the model. This model should be used within both languages.
 
     \begin{figure}
         \centering
         \includegraphics[width=0.4\textwidth]{NerddeckModel.png}
-        \caption{Entity-Relationship Model of Flashcard and Deck}
-        \label{fig:model}
+        \caption{Entity-Relationship Model of Flashcard and Deck}\label{fig:model}
     \end{figure}
 
     \begin{lstlisting}[language=json,firstnumber=1,float=tp, caption={Example of how a flashcard is saved inside a \ac{json} file}, label=l:flashcardjson]
@@ -70,7 +69,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
     \end{lstlisting}
 
     \section{Functionality Overview and User Interface}
-    In figure \ref{fig:screenshotcli} the result of the F\# implementation can be seen, the welcome screen and menu looks the same way in the go implementation.. A user who executes the programm can select between 5 choices:        
+    In figure \ref{fig:screenshotcli} the result of the F\# implementation can be seen, the welcome screen and menu looks the same way in the go implementation.. A user who executes the program can select between 5 choices:        
     \begin{itemize}
         \item \textbf{0. Instructions:} Shows how the program should be used.
         \item \textbf{1. Add Flash Card} Add a Flash Card and saves it into the \ac{json} file.
@@ -90,7 +89,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
     \chapter{Overview of functional programming}\label{chap:functional-programming}
     \begin{shaded}
         \noindent
-        \glqq{}As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularised. Functional languages push those limits back.\grqq{} \cite{Hughes1989}
+        \glqq{}As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularized. Functional languages push those limits back.\grqq{} \cite{Hughes1989}
     \end{shaded}
     This should be the motivation considering the usage of \ac{fp}.
     Within the paradigm of \ac{fp}, developers engage with principles that underscore the pursuit of expressive and concise solutions. Rooted in mathematical concepts like lambda calculus, \ac{fp} emerges as a methodology characterized by rigor and elegance.
@@ -102,7 +101,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
         \item \textbf{Higher-order functions:} Utilization of functions as parameters and return values for enhanced modularity.
         \item \textbf{Lazy evaluation:} Selective computation, evaluating values only when necessary for optimization.
         \item \textbf{Algebraic data types:} Incorporation of sum- and product-types, as discussed in more detail in Section \ref{sec:algebraic-data-types}.
-        \item \textbf{Pattern Matching:} A powerful technique, elaborated further in Section \ref{sec:pattern-matching}.
+        \item \textbf{First-class Functions:} A powerful technique, elaborated further in Section \ref{sec:first-class-functions}.
     \end{itemize}
     
     Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like F\# and Go. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:language-comparison}.
@@ -118,7 +117,7 @@ Within the broader spectrum of programming paradigms, the imperative and declara
 
 \subsubsection{Imperative Approach}
 
-The imperative paradigm, exemplified by Algorithm \ref{alg:imperative_sum}, guides the computer through computations using explicit steps. Each line of pseudocode instructs the computer on how to perform the calculation, adhering to traditional imperative paradigms.
+Algorithm \ref{alg:imperative_sum} exemplifies the imperative paradigm, which guides the computer through computations using explicit steps. Each line of pseudocode provides instructions to the computer on how to perform the calculation, adhering to traditional imperative paradigms.
 
 \begin{algorithm}
     \SetKwInOut{Input}{Input}
@@ -168,7 +167,7 @@ The juxtaposition of these algorithms not only highlights the difference in codi
 In this chapter, we explore the distinctive features of Go and F\#, offering a brief overview of each language.
 
     \section{Overview of Go}\label{sec:go-overview}
-    Go, commonly known as Golang, is employed to build simple, secure, and scalable systems. It is a statically-typed, compiled programming langauge designed by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson in 2007. It is used very widely within big companys like Google, Paypal or Netflix. As an open source language, Go is characterized by: 
+    Go, commonly known as Golang, is employed to build simple, secure, and scalable systems. It is a statically-typed, compiled programming langauge designed by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson in 2007. It is used very widely within big companies like Google, Paypal or Netflix. As an open source language, Go is characterized by: 
     \begin{itemize}
         \item \textbf{Concurrent programming:}  Native support through goroutines and channels for scalable and parallelized applications.
         \item \textbf{Efficiency:} Statically-typed, compiled that produces standalone binaries. Good for deployment in various environments.
@@ -178,7 +177,7 @@ In this chapter, we explore the distinctive features of Go and F\#, offering a b
 
     \section{Overview of F\#}\label{sec:fsharp-overview}
     F\# is a functional-first programming language developed by Microsoft Research in 2005.
-    Besides C\# and Visual Basic, F\# is another programming language within the .NET ecosystem. On the official website of microsoft it is delared as an open-source language that makes it easy to write succinct, robust, and performant code. Microsoft names itself as a leading contributor. F\# has an active community and support \cite{fsharpfoundation}.
+    Besides C\# and Visual Basic, F\# is another programming language within the .NET ecosystem. On the official website of microsoft it is declared as an open-source language that makes it easy to write succinct, robust, and performant code. Microsoft names itself as a leading contributor. F\# has an active community and support \cite{fsharpfoundation}.
     While developing, F\# has a very powerful build-in future called \ac{repl}. Besides of that the key features are:
     \begin{itemize}
         \item \textbf{Functional-first:} Immutable by default, First-class functions, Pattern Matching, Algebraic Data Types 
@@ -207,7 +206,7 @@ In order to compare the two languages, the following two functional concepts are
         \subsection*{Go}
         In Go, developers commonly use struct types to represent data structures. While structs provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by ADTs.
 
-        The \texttt{FlashCard} type is defined using a struct . Go structs are mutable, and fields can be updated after the struct's creation. The \texttt{FlashCard} struct includes fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Go uses explicit types for each field, providing a statically typed approach.
+        The \texttt{FlashCard} type is defined using a struct. Go structs are mutable, and fields can be updated after the struct's creation. The \texttt{FlashCard} struct includes fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Go uses explicit types for each field, providing a statically typed approach.
 
 \begin{figure}[ht]
     \begin{subfigure}{0.48\textwidth}
@@ -273,7 +272,7 @@ let dueFlashcards = List.filter isDueForReview flashcards
             
             In this Go example, we define a first-class function `isDueForReview` that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a slice of flashcards and print the result.
 
-    \section{Conclusion}
+    \section{Key Takeaway}\label{sec:keytakeaway}
     In conclusion, when it comes to algebraic data types—a fundamental feature in functional programming—F\# excels with its native support for discriminated unions and pattern matching. While Go developers can achieve similar outcomes using struct types and interfaces, F\# provides a more elegant and concise solution. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and functional programming styles.
 
 
