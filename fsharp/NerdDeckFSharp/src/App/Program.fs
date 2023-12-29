@@ -131,10 +131,10 @@ let rec mainLoop (cards: FlashCardDeck) : unit =
     | "4" -> printfn "\n\n================================\nExiting NerdDeck. Goodbye!"
     | _ ->
         printfn "Invalid option. Please try again."
-        mainLoop cards
+        cards |> mainLoop 
 
 printWelcomeMessage ()
 
 match loadFlashCards () with
-| Ok cards -> mainLoop cards
+| Ok cards -> cards |> mainLoop 
 | Error ex -> printfn $"Error loading flashcards: %s{ex}"

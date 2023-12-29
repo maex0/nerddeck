@@ -3,17 +3,17 @@ module FlashCard
 open System
 
 let defaultRepetition = 0
-let gradeThree = 3
 let firstRepetition = 1
 let secondRepetition = 2
 let defaultGrade = 1
+let gradeThree = 3
 
 type FlashCard =
     { ID: string
       Question: string
       Answer: string
       Repetitions: int
-      EFactor: float
+      EasinessFactor: float
       NextReview: DateTime }
 
 type FlashCardDeck = List<FlashCard>
@@ -24,7 +24,7 @@ let addFlashCard (question: string) (answer: string) (cards: FlashCardDeck) : Fl
           Question = question
           Answer = answer
           Repetitions = 0
-          EFactor = 2.5
+          EasinessFactor = 2.5
           NextReview = DateTime.Now }
 
     newCard :: cards
@@ -51,7 +51,7 @@ let applySM2Algorithm card grade =
     // 1. Update repetitions and easiness factor
     let repetitions, eFactor =
         if card.Repetitions = defaultRepetition || numericGrade >= gradeThree then
-            card.Repetitions + 1, calculateNewEFactor card.EFactor numericGrade
+            card.Repetitions + 1, calculateNewEFactor card.EasinessFactor numericGrade
         else
             firstRepetition, 1.3
 
@@ -64,5 +64,5 @@ let applySM2Algorithm card grade =
 
     { card with
         Repetitions = repetitions
-        EFactor = eFactor
+        EasinessFactor = eFactor
         NextReview = nextReview }
