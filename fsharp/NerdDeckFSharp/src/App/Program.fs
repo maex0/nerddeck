@@ -65,7 +65,7 @@ let createNewFlashCard (cards: FlashCardDeck) : FlashCardDeck =
         printfn "Flash card added successfully!"
         updatedDeck
     | Error err ->
-        printfn $"Error saving flashcards: %s{err.Message}"
+        printfn $"Error saving flashcards: %s{err}"
         updatedDeck
 
 let viewFlashCards (cards: FlashCardDeck) =
@@ -76,6 +76,23 @@ let viewFlashCards (cards: FlashCardDeck) =
         |> List.iteri (fun i card -> printfn $"%d{i + 1}. Q: %s{card.Question}\n   A: %s{card.Answer}\n")
 
     cards
+
+let reviewCard(card: FlashCard)(cards: FlashCardDeck) =
+    printfn $"Q: %s{card.Question}\n"
+    let _ = "Press Enter to reveal the answer..." |> getUserInput
+    printfn $"A: %s{card.Answer}\n\n"
+
+    let grade = "How well did you remember this card 1-4\n" |> getUserInput 
+    let updatedCard = applySM2Algorithm card grade
+    // Replace the old card with the updated one
+    let updatedCards =
+        List.map (fun c -> if c.ID = updatedCard.ID then updatedCard else c) cards
+
+    match saveFlashCards updatedCards with
+    | Ok _ -> updatedCards
+    | Error err ->
+        printfn $"Error saving flashcards: %s{err}"
+        updatedCards
 
 let startLearning (cards: FlashCardDeck) : FlashCardDeck =
     if List.isEmpty cards then
@@ -95,22 +112,7 @@ let startLearning (cards: FlashCardDeck) : FlashCardDeck =
             |> List.fold
                 (fun updatedCards dueCard ->
                     match findCardByID cards dueCard.ID with
-                    | Some card ->
-                        printfn $"Q: %s{card.Question}\n"
-                        let _ = "Press Enter to reveal the answer..." |> getUserInput
-                        printfn $"A: %s{card.Answer}\n\n"
-
-                        let grade = "How well did you remember this card 1-4\n" |> getUserInput 
-                        let updatedCard = applySM2Algorithm card grade
-                        // Replace the old card with the updated one
-                        let updatedCards =
-                            List.map (fun c -> if c.ID = updatedCard.ID then updatedCard else c) updatedCards
-
-                        match saveFlashCards updatedCards with
-                        | Ok _ -> updatedCards
-                        | Error err ->
-                            printfn $"Error saving flashcards: %s{err.Message}"
-                            updatedCards
+                    | Some card ->  reviewCard card updatedCards
                     | None -> updatedCards)
                 cards
 
@@ -129,10 +131,10 @@ let rec mainLoop (cards: FlashCardDeck) : unit =
     | "4" -> printfn "\n\n================================\nExiting NerdDeck. Goodbye!"
     | _ ->
         printfn "Invalid option. Please try again."
-        mainLoop cards
+        cards |> mainLoop 
 
 printWelcomeMessage ()
 
 match loadFlashCards () with
-| Ok cards -> mainLoop cards
-| Error ex -> printfn $"Error loading flashcards: %s{ex.Message}"
+| Ok cards -> cards |> mainLoop 
+| Error ex -> printfn $"Error loading flashcards: %s{ex}"

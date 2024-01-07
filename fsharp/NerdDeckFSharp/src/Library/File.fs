@@ -3,18 +3,21 @@ module File
 open System.IO
 open System.Text.Json
 open FlashCard
-
+open System
 
 let flashcardsFile = "flashcards.json"
 
 let loadFlashCards() =
     try
         let file = File.ReadAllText(flashcardsFile)
-        let cards = JsonSerializer.Deserialize<FlashCard list>(file)
-        Ok cards
+        if String.IsNullOrWhiteSpace(file) then
+            Ok []
+        else    
+            let cards = JsonSerializer.Deserialize<FlashCard list>(file)
+            Ok cards
     with
     | :? FileNotFoundException -> Ok []
-    | ex -> Error ex
+    | ex -> Error "An error occurred while loading the flashcards."
 
 let saveFlashCards (cards: FlashCardDeck) =
     try
@@ -23,4 +26,4 @@ let saveFlashCards (cards: FlashCardDeck) =
         File.WriteAllText(flashcardsFile, file)
         Ok ()
     with
-    | ex -> Error ex
+    | ex -> Error "An error occurred while saving the flashcards."
