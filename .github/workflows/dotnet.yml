@@ -1,9 +1,6 @@
 name: Build F# Nerddeck
 
-on:
-  push:
-    paths:
-      - fsharp/**
+on: [push]
 
 jobs:
   build:
