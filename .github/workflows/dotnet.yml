@@ -53,4 +53,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: NerdDeckFSharp-${{ matrix.os }}
-          path: ${{ github.workspace }}/fsharp/NerdDeckFSharp/publish/src/App/publish/${{ matrix.os }}
+          path: ${{ github.workspace }}/fsharp/NerdDeckFSharp/src/App/publish/${{ matrix.os }}
