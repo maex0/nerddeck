@@ -49,7 +49,7 @@ jobs:
         with:
           dotnet-version: '7.0.x'
       - name: Publish F#
-        run: dotnet publish --configuration Release --self-contained true --runtime ${{ matrix.os }} --property:OutputPath=./publish
+        run: dotnet publish --configuration Release --self-contained true --runtime ${{ matrix.os }} --property:OutputPath=./publish/${{ matrix.os }}
         working-directory: ${{ github.workspace }}/fsharp/NerdDeckFSharp/src/App
 
       - name: Upload artifact
