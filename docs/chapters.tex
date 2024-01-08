@@ -47,7 +47,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
     \section{Data}
     For the purpose of this project, a single \ac{json} file is used as a simple and lightweight database to store flashcards. For example in the \ac{json} object in listing \ref{l:flashcardjson}. While this approach is suitable for educational and illustrative purposes, it may not be suitable for production usage due to limitations in scalability and concurrent access. In a production environment, a more robust database solution should be considered, such as a relational database (e.g., PostgreSQL\footnote{Website: \url{https://www.postgresql.org} (Accessed on 12/02/2023)}, MySQL\footnote{Website: \url{https://www.mysql.com} (Accessed on 12/02/2023)}) or a NoSQL database (e.g., MongoDB\footnote{Website: \url{https://www.mongodb.com} (Accessed on 12/02/2023)}). The choice of the database will depend on the specific requirements of the \ac{app}.
 
-    \subsection{Model}
+    \subsection*{Model}
     To be able to fulfill the requirements of table \ref{tab:requirements} a model is needed for a flashcard. These are shown in figure \ref{fig:model}. It is important that allow a user to create multiple flashcards and validate that there is no flashcard with a duplicate question and answer. The ID is generated from the question and answer of the flashcard. This ID acts like a primary key for the model. This model should be used within both languages.
 
     \begin{figure}
@@ -91,26 +91,30 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
         \glqq{}As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularized. Functional languages push those limits back.\grqq{} \cite{Hughes1989}
     \end{shaded}
     This should be the motivation considering the usage of \ac{fp}.
-    Within the paradigm of \ac{fp}, developers engage with principles that underscore the pursuit of expressive and concise solutions. Rooted in mathematical concepts like lambda calculus, \ac{fp} emerges as a methodology characterized by rigor and elegance.
+    Within the paradigm of \ac{fp}, developers engage with principles that underscore the pursuit of expressive and concise solutions.
     
-    Key principles integral to \ac{fp} include:
+\section{Key principles}
     
-    \begin{itemize}
-        \item \textbf{Purity:} Strict avoidance of side effects to ensure deterministic behavior.
-        \item \textbf{Higher-order functions:} Utilization of functions as parameters and return values for enhanced modularity.
-        \item \textbf{Lazy evaluation:} Selective computation, evaluating values only when necessary for optimization.
-        \item \textbf{Algebraic data types:} Incorporation of sum- and product-types, as discussed in more detail in Section \ref{sec:algebraic-data-types}.
-        \item \textbf{First-class Functions:} A powerful technique, elaborated further in Section \ref{sec:first-class-functions}.
-    \end{itemize}
-    
-    Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like Go and F\#. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:language-comparison}.
-    
-    As developers navigate through contrasting algorithms, exploring the interplay between imperative and declarative styles, they reflect on the historical evolution and diversity of \ac{fp} languages. This exploration serves as a testament to the flexibility of programming paradigms and prompts consideration of the nuanced trade-offs between explicit instruction and expressive abstraction within the dynamic context of \ac{fp}.
-    
-    In conclusion, \ac{fp} equips professionals with a robust set of tools, emphasizing immutability, higher-order functions, and mathematical principles. It not only addresses contemporary challenges in software development but also fosters a deeper understanding of the intricacies involved in designing robust, modular, and expressive code.
+Rooted in mathematical concepts like lambda calculus, \ac{fp} emerges as a methodology characterized by rigor and elegance.
+
+Key principles integral to \ac{fp} include:
+
+\begin{itemize}
+    \item \textbf{Purity:} Strict avoidance of side effects to ensure deterministic behavior.
+    \item \textbf{Higher-order functions:} Utilization of functions as parameters and return values for enhanced modularity.
+    \item \textbf{Lazy evaluation:} Selective computation, evaluating values only when necessary for optimization.
+    \item \textbf{Algebraic data types:} Incorporation of sum- and product-types, as discussed in more detail in Section \ref{sec:algebraic-data-types}.
+    \item \textbf{First-class Functions:} A powerful technique, elaborated further in Section \ref{sec:first-class-functions}.
+\end{itemize}
+
+Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like Go and F\#. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:language-comparison}.
+
+As developers navigate through contrasting algorithms, exploring the interplay between imperative and declarative styles, they reflect on the historical evolution and diversity of \ac{fp} languages. This exploration serves as a testament to the flexibility of programming paradigms and prompts consideration of the nuanced trade-offs between explicit instruction and expressive abstraction within the dynamic context of \ac{fp}.
+
+In conclusion, \ac{fp} equips professionals with a robust set of tools, emphasizing immutability, higher-order functions, and mathematical principles. It not only addresses contemporary challenges in software development but also fosters a deeper understanding of the intricacies involved in designing robust, modular, and expressive code.
     
 
-\section*{Imperative vs. Declarative}
+\section{Imperative vs. Declarative}
 
 Within the broader spectrum of programming paradigms, the imperative and declarative styles represent two contrasting approaches to articulating code. The following will demonstrate both approaches using a simple algorithm written in pseudo code for summing up an array of numbers.
 
@@ -142,7 +146,7 @@ Algorithm \ref{alg:imperative_sum} is an example of the imperative paradigm. Thi
 
 \subsubsection{Declarative Approach}
 
-In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_sum}, shifts the emphasis from detailing step-by-step procedures to expressing the desired outcome directly. This approach, a hallmark of \ac{fp}, leverages the power of functions and abstraction.
+In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_sum}, shifts the emphasis from detailing step-by-step procedures to expressing the desired outcome directly. This approach, a hallmark of \ac{fp}, leverages the power of functions and abstraction. Later on in chapter \ref{chap:language-comparison} we will discover a similar short syntax while using F\#.
 
 \begin{algorithm}
     \SetKwInOut{Input}{Input}
