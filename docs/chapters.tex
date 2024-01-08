@@ -1,7 +1,7 @@
 \chapter{Introduction}\label{chap:introduction}
 This paper is written for the master course \textit{Concepts of Programming Languages} of the department of computer science in the Winter Term 23/24 at the Technical University of Applied Sciences Rosenheim.
     \section{Background}\label{sec:background}
-As of the TIOBE Index data as of November 2023, it is reported that there are currently over 150 programming languages in existence. This implies that, up until the present moment, the programming landscape continues to encompass a diverse array of languages, reflecting the dynamic and ever-evolving nature of the field.\cite{tiobeindex} The task of a software engineer at a certain point in the production of software is to select one of these programming languages that is suitable for a particular problem. This can be a science in itself. This very topic has been discussed for around 50 years.\cite{Tharp1982}
+As of the TIOBE Index data as of November 2023, it is reported that there are currently over 150 programming languages in existence. This implies that, up until the present moment, the programming landscape continues to encompass a diverse array of languages, reflecting the dynamic and ever-evolving nature of the field.\cite{Tiobeindex} The task of a software engineer at a certain point in the production of software is to select one of these programming languages that is suitable for a particular problem. This can be a science in itself. This very topic has been discussed for around 50 years.\cite{Tharp1982}
 The reason for that is that every language has its own paradigms and concepts. One can come up with a solution, selecting a language which fits a lot of problems but not a single one perfect. Or he selects one which fits perfect for a single problem but it is not possible to solve all the other problems.
 So the goal would be to select the \textit{right} programming language which suits the requirements and the surrounding of a given problem accordingly.
 This spot should be covered by this paper with the comparison of Go and F\# in the context of \ac{fp}.
@@ -23,7 +23,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
     \textit{NerdDeck} is an \ac{app} which can help remembering things with flashcards. There exists already such a product called Anki\footnote{Website: \url{https://apps.ankiweb.net} (Accessed on 12/03/2023)} for the same use case. Most parts of Anki are written in Rust and Python.\footnote{Website: \url{https://github.com/ankitects/anki} (Accessed on 12/03/2023)} The difference in \textit{NerdDeck} is that it is written twice, each time in a different programming language, Go and F\#, and the \ac{fp} paradigm is used. In F\# there will be no problem as it will turn out in section \ref{sec:fsharp-overview} because it is possible to write functional-first code. But as Go is a impure language, the goal is to write it as functional as possible. To be able to adhere to the project framework, \textit{NerdDeck} uses the \ac{cli} as a \ac{gui} while Anki has its own developed one.
 
     \section{Requirements}
-     The \ac{app} should allow a single user to use the \ac{sm2} alorithm which is used for a learning technique called spaced repetition.\cite{sm2} One of Anki's algorithms is also based on \ac{sm2}.\footnote{Website: \url{https://faqs.ankiweb.net/what-spaced-repetition-algorithm.html} (Accessed on 12/03/2023)} Because \textit{NerdDeck} is build by a student, the requirements are also written from a students perspective. These are written down in table \ref{tab:requirements}. The requirements should not differ too big from other users using this \ac{app}. The goal is to implement this twice, one time in Go and then in F\#, both in a functional style. The program should act as a \ac{mvp}, so it's possible to do the comparison about \ac{fp}. Because of that and to reduce the complexity, only one deck exists where a user can add new flashcards. They can not be deleted.
+     The \ac{app} should allow a single user to use the \ac{sm2} alorithm which is used for a learning technique called spaced repetition.\cite{Sm2} One of Anki's algorithms is also based on \ac{sm2}.\footnote{Website: \url{https://faqs.ankiweb.net/what-spaced-repetition-algorithm.html} (Accessed on 12/03/2023)} Because \textit{NerdDeck} is build by a student, the requirements are also written from a students perspective. These are written down in table \ref{tab:requirements}. The requirements should not differ too big from other users using this \ac{app}. The goal is to implement this twice, one time in Go and then in F\#, both in a functional style. The program should act as a \ac{mvp}, so it's possible to do the comparison about \ac{fp}. Because of that and to reduce the complexity, only one deck exists where a user can add new flashcards. They can not be deleted.
     \begin{table}[h]
         \centering
         \begin{tabular}{|m{0.5in}|m{4in}|}
@@ -56,16 +56,16 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
         \caption{\ac{uml} diagram of the Flashcard model}\label{fig:model}
     \end{figure}
 
-    \begin{lstlisting}[language=json,firstnumber=1,float=tp, caption={Example of how a flashcard is saved inside a \ac{json} file}, label=l:flashcardjson]
-    [{
-        "ID": "37268335dd6931045bdcdf926",
-        "Question": "What algebraic data types does F# use?",
-        "Answer": "Record types and discriminated unions",
-        "Repetitions": 1,
-        "EasinessFactor": 1.3,
-        "NextReview": "2023-12-18T18:17:22.438077+01:00"
-    }]   
-    \end{lstlisting}
+\begin{lstlisting}[language=json,firstnumber=1,float=tp, caption={Example of how a flashcard is saved inside a \ac{json} file}, label=l:flashcardjson]
+[{
+    "ID": "37268335dd6931045bdcdf926",
+    "Question": "What algebraic data types does F# use?",
+    "Answer": "Record types and discriminated unions",
+    "Repetitions": 1,
+    "EasinessFactor": 1.3,
+    "NextReview": "2023-12-18T18:17:22.438077+01:00"
+}]   
+\end{lstlisting}
 
     \section{Functionality Overview and User Interface}
     In figure \ref{fig:screenshotcli} the prompt inside the \ac{cli} of the F\# implementation can be seen. This welcome screen and menu looks the same way in the go implementation. A user who executes the program can select between the following five choices:        
@@ -79,8 +79,8 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
 
     \begin{figure}
         \centering
-        \includegraphics[width=0.6\textwidth]{ScreenshotNerdDeck.png}
-        \caption{Screenshot of the \ac{cli}. Shows start of \textit{NerdDeck}.}
+        \includegraphics[width=0.7\textwidth]{ScreenshotNerdDeck.png}
+        \caption{Screenshot of the \ac{cli} which shows the start of \textit{NerdDeck}.}
         \label{fig:screenshotcli}
     \end{figure}
 
@@ -169,19 +169,19 @@ In this chapter, we explore the distinctive features of Go and F\#, offering a b
         \item \textbf{Efficiency:} Statically-typed, compiled that produces standalone binaries. Good for deployment in various environments.
         \item \textbf{Flexibility:} Can be used for Cloud \& Network Services, \ac{cli}s, Web Development and Development Operations \& Site Reliability Engineering.
     \end{itemize}
-    \cite{GoWebsite}
+    \cite{Gowebsite}
 
     \section{Overview of F\#}\label{sec:fsharp-overview}
     F\# is a functional-first programming language developed by Microsoft Research in 2005.
-    Besides C\# and Visual Basic, F\# is another programming language within the .NET ecosystem. On the official website of microsoft it is declared as an open-source language that makes it easy to write succinct, robust, and performant code. Microsoft names itself as a leading contributor. F\# has an active community and support \cite{fsharpfoundation}.
+    Besides C\# and Visual Basic, F\# is another programming language within the .NET ecosystem. On the official website of microsoft it is declared as an open-source language that makes it easy to write succinct, robust, and performant code. Microsoft names itself as a leading contributor. F\# has an active community and support \cite{Fsharpfoundation}.
     While developing, F\# has a very powerful build-in future called \ac{repl}. Besides of that the key features are:
     \begin{itemize}
         \item \textbf{Functional-first:} Immutable by default, First-class functions, Pattern Matching, Algebraic Data Types 
         \item \textbf{Lightweight syntax:} Type inference and automatic generalization
         \item \textbf{Interoperability:} Access .NET Libraries and APIs (e.g. ASP.NET or Entity Framework). 
     \end{itemize}
-    \cite{dotnet}
-    \cite{keyfeaturesfsharp}
+    \cite{Dotnet}
+    \cite{Keyfeaturesfsharp}
     
 
 
@@ -203,32 +203,32 @@ To compare the programming languages Go and F\# in the context of \ac{fp}, we wi
         Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. This can be seen in listing \ref{l:flashcardgo}. Go structs are mutable, meaning that fields can be updated after creation. Additionally, Go uses explicit types for each field, providing a statically typed approach.
 
 \begin{figure}[ht]
-    \begin{subfigure}{0.48\textwidth}
-        \begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in Go}, label=l:flashcardgo]
-    type FlashCard struct {
-        ID          string
-        Question    string
-        Answer      string
-        Repetitions int
-        EFactor     float64
-        NextReview  time.Time
-    }
-        \end{lstlisting}
-    \end{subfigure}\hfill
-    \begin{subfigure}{0.48\textwidth}
-        \begin{lstlisting}[language=FSharp, firstnumber=1, caption={FlashCard representation in F\#}, label=l:flashcardfsharp]
-    type FlashCard =
-        { ID : string
-        Question : string
-        Answer : string
-        Repetitions : int
-        EFactor : float
-        NextReview : DateTime }
-        \end{lstlisting}
-    \end{subfigure}
-    \caption{Comparison of FlashCard representations in Go and F\#}
-    \label{fig:flashcardcomparison}
-    \end{figure}
+\begin{subfigure}{0.48\textwidth}
+\begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in Go}, label=l:flashcardgo]
+type FlashCard struct {
+    ID          string
+    Question    string
+    Answer      string
+    Repetitions int
+    EFactor     float64
+    NextReview  time.Time
+}
+\end{lstlisting}
+\end{subfigure}\hfill
+\begin{subfigure}{0.48\textwidth}
+\begin{lstlisting}[language=FSharp, firstnumber=1, caption={FlashCard representation in F\#}, label=l:flashcardfsharp]
+type FlashCard =
+    { ID : string
+    Question : string
+    Answer : string
+    Repetitions : int
+    EFactor : float
+    NextReview : DateTime }
+\end{lstlisting}
+\end{subfigure}
+\caption{Comparison of FlashCard representations in Go and F\#}
+\label{fig:flashcardcomparison}
+\end{figure}
 
     \section{First-class Functions}\label{sec:first-class-functions}
     Both Go and F\# support first-class functions, treating functions as first-class citizens. In Go, functions can be assigned to variables, passed as arguments, and returned as values. The use of anonymous functions, known as closures, is common in Go, enhancing the \ac{fp} paradigm. Similarly, F\# provides robust support for first-class functions, aligning with its \ac{fp} paradigm. Functions in F\# can be assigned to variables, passed as arguments, and returned as values. The language encourages the use of higher-order functions, enabling powerful abstractions through functions.
@@ -236,12 +236,12 @@ To compare the programming languages Go and F\# in the context of \ac{fp}, we wi
     \subsection*{F\#}
     In the F\# example in listing \ref{l:dueforreviewfsharp}, we define a first-class function \texttt{isDueForReview} that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a list of flashcards, to check if a flashcard is due for learning or not. The return value of the function should be a list of due flashcards. As an example in line four, the function is called on the List.filter function. It takes a predicate of type \texttt{T -> bool} and a list as input and returns a list containing only the elements that satisfy the predicate.\footnote{Website: \url{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html\#filter} (Accessed on 01/08/2024)} Moreover, F\# introduces the pipe operator \texttt{|>}, affording developers the convenience of placing the last argument at the forefront. This operator facilitates a more fluid and readable syntax, as exemplified by \texttt{cards |> List.filter isDueForReview}, where the \texttt{isDueForReview} function is seamlessly applied to the \texttt{cards} list through the pipe operator. This expression is equivalent to line four of listing \ref{l:dueforreviewfsharp}. The same functionality should no be implemented in the Go programming language.
 
-        \begin{lstlisting}[language=fsharp, firstnumber=1,float=tp, caption={First-class function reresentation in F\#}, label=l:dueforreviewfsharp]
+\begin{lstlisting}[language=fsharp, firstnumber=1,float=tp, caption={First-class function reresentation in F\#}, label=l:dueforreviewfsharp]
 let isDueForReview card =
     card.Repetitions > 0 && card.NextReview <= DateTime.Now
         
 let dueFlashCards = List.filter isDueForReview cards
-        \end{lstlisting}
+\end{lstlisting}
         
       
     \subsection*{Go}
@@ -249,25 +249,25 @@ let dueFlashCards = List.filter isDueForReview cards
     
     As an example, line 17 invokes the \texttt{filterDueFlashCards} function with a given set of flashcards (\texttt{cards}) and assigns the resulting list of flashcards due for review to the \texttt{dueFlashCards} variable. This variable encapsulates the outcome of the flashcard filtering process.
 
-        \begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in F\#}, label=l:dueforreviewgo]
-            func isDueForReview(card FlashCard) bool {
-                return card.Repetitions > 0 
-                && card.NextReview.Before(time.Now())
-            }
-            
-            func filterDueFlashCards(cards []FlashCard) []FlashCard {
-                var dueFlashCards []FlashCard
-                for _, card := range cards {
-                    if isDueForReview(card) {
-                        dueFlashCards = append(dueFlashCards, card)
-                    }
-                }
-                return dueFlashCards
-            }
-            
-    
-            dueFlashCards := filterDueFlashCards(cards)
-            \end{lstlisting}
+\begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in F\#}, label=l:dueforreviewgo]
+func isDueForReview(card FlashCard) bool {
+    return card.Repetitions > 0 
+    && card.NextReview.Before(time.Now())
+}
+
+func filterDueFlashCards(cards []FlashCard) []FlashCard {
+    var dueFlashCards []FlashCard
+    for _, card := range cards {
+        if isDueForReview(card) {
+            dueFlashCards = append(dueFlashCards, card)
+        }
+    }
+    return dueFlashCards
+}
+
+
+dueFlashCards := filterDueFlashCards(cards)
+\end{lstlisting}
             
 
     \section{Key Takeaway}\label{sec:keytakeaway}
