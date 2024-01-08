@@ -8,8 +8,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
 
     \section{Purpose of the Project}\label{sec:purpose}
     The object of this project is to analyze and compare the similarities and differences between two functional programming languages. The selected languages for this comparative study are Go\footnote{Website: \url{https://go.dev} (Accessed on 12/02/2023)} and F\#\footnote{Website: \url{https://dotnet.microsoft.com/languages/fsharp} (Accessed on 12/02/2023)}. Go was chosen as the initial language due to its consistent usage throughout the course, making it mandatory inclusion in the project. 
-    In addition to Go, a second programming language is essential for the comparative analysis, and F\# has been selected for this purpose. The inclusion of F\# in this study was a deliberate choice, as explained in section 
-    ef{sec:whyfsharp}. By juxtaposing Go and F\#, the project aims to unravel the nuances and divergences in their approaches to \ac{fp} paradigms, shedding light on their distinctive features, strengths, and potential use cases. Through this comparative exploration, the project seeks to contribute valuable insights into the \ac{fp} landscape, providing a nuanced understanding of the strengths and trade-offs associated with these two languages.
+    In addition to Go, a second programming language is essential for the comparative analysis, and F\# has been selected for this purpose. The inclusion of F\# in this study was a deliberate choice, as explained in section \ref{sec:whyfsharp}. By juxtaposing Go and F\#, the project aims to unravel the nuances and divergences in their approaches to \ac{fp} paradigms, shedding light on their distinctive features, strengths, and potential use cases. Through this comparative exploration, the project seeks to contribute valuable insights into the \ac{fp} landscape, providing a nuanced understanding of the strengths and trade-offs associated with these two languages.
 
     \section{Why F\#?}\label{sec:whyfsharp}
     One of the key reasons for choosing F\# is its status as a functional-first programming language. In contrast to Go's multi-paradigm approach, F\#'s commitment to functional principles provides an excellent opportunity to explore the benefits of implementing code from a pure perspective.
@@ -21,10 +20,10 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
 \chapter{Project Overview}\label{chap:project-overview}
     \section{Description of the \textit{NerdDeck} Flash Card Application}\label{sec:description}
     This coding project should illustrate and highlight similarities and differences about \ac{fp} in Go versus F\#.
-    \textit{NerdDeck} is app which can help remembering things with flashcards. There exists already such a product called Anki\footnote{Website: \url{https://apps.ankiweb.net} (Accessed on 12/03/2023)} for the same use case. Most parts of Anki are written in Rust and Python.\footnote{Website: \url{https://github.com/ankitects/anki} (Accessed on 12/03/2023)} The difference in \textit{NerdDeck} is that it is written twice, each time in a different programming language, Go and F\#, and the \ac{fp} paradigm should be used. In F\# there will be no problem as it will turn out in section \ref{sec:fsharp-overview} because it is possible to write functional-first code. But as Go is a impure language, the goal is to write it as functional as possible. In addition to that, \textit{NerdDeck} should just use the \ac{cli} as a \ac{gui} while Anki has a own one.
+    \textit{NerdDeck} is an \ac{app} which can help remembering things with flashcards. There exists already such a product called Anki\footnote{Website: \url{https://apps.ankiweb.net} (Accessed on 12/03/2023)} for the same use case. Most parts of Anki are written in Rust and Python.\footnote{Website: \url{https://github.com/ankitects/anki} (Accessed on 12/03/2023)} The difference in \textit{NerdDeck} is that it is written twice, each time in a different programming language, Go and F\#, and the \ac{fp} paradigm is used. In F\# there will be no problem as it will turn out in section \ref{sec:fsharp-overview} because it is possible to write functional-first code. But as Go is a impure language, the goal is to write it as functional as possible. To be able to adhere to the project framework, \textit{NerdDeck} uses the \ac{cli} as a \ac{gui} while Anki has its own developed one.
 
     \section{Requirements}
-     The \ac{app} should allow a single user to use the \ac{sm2} alorithm which is used for spaced repetition.\cite{sm2} One of Anki's algroithms is also based on \ac{sm2}.\footnote{Website: \url{https://faqs.ankiweb.net/what-spaced-repetition-algorithm.html} (Accessed on 12/03/2023)} Because \textit{NerdDeck} is build by a student, the requirements are also written from a students perspective. The requirements are written down in table \ref{tab:requirements}. These should not differ too big from other users using this application. The goal is to implement this twice, one time in Go and then in F\#, both in a functional style. The program should act as a \ac{mvp}, so it's possible to do the comparison about \ac{fp}. Because of that and to reduce the complexity, only one deck exists where a user can add new flashcards. They can not be deleted.
+     The \ac{app} should allow a single user to use the \ac{sm2} alorithm which is used for a learning technique called spaced repetition.\cite{sm2} One of Anki's algorithms is also based on \ac{sm2}.\footnote{Website: \url{https://faqs.ankiweb.net/what-spaced-repetition-algorithm.html} (Accessed on 12/03/2023)} Because \textit{NerdDeck} is build by a student, the requirements are also written from a students perspective. These are written down in table \ref{tab:requirements}. The requirements should not differ too big from other users using this \ac{app}. The goal is to implement this twice, one time in Go and then in F\#, both in a functional style. The program should act as a \ac{mvp}, so it's possible to do the comparison about \ac{fp}. Because of that and to reduce the complexity, only one deck exists where a user can add new flashcards. They can not be deleted.
     \begin{table}[h]
         \centering
         \begin{tabular}{|m{0.5in}|m{4in}|}
@@ -54,7 +53,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
     \begin{figure}
         \centering
         \includegraphics[width=0.4\textwidth]{NerddeckModel.png}
-        \caption{Entity-Relationship Model of Flashcard and Deck}\label{fig:model}
+        \caption{\ac{uml} diagram of the Flashcard model}\label{fig:model}
     \end{figure}
 
     \begin{lstlisting}[language=json,firstnumber=1,float=tp, caption={Example of how a flashcard is saved inside a \ac{json} file}, label=l:flashcardjson]
@@ -69,7 +68,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
     \end{lstlisting}
 
     \section{Functionality Overview and User Interface}
-    In figure \ref{fig:screenshotcli} the result of the F\# implementation can be seen, the welcome screen and menu looks the same way in the go implementation.. A user who executes the program can select between 5 choices:        
+    In figure \ref{fig:screenshotcli} the prompt inside the \ac{cli} of the F\# implementation can be seen. This welcome screen and menu looks the same way in the go implementation. A user who executes the program can select between the following five choices:        
     \begin{itemize}
         \item \textbf{0. Instructions:} Shows how the program should be used.
         \item \textbf{1. Add Flash Card} Add a Flash Card and saves it into the \ac{json} file.
@@ -80,7 +79,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
 
     \begin{figure}
         \centering
-        \includegraphics[width=0.8\textwidth]{ScreenshotNerdDeck.png}
+        \includegraphics[width=0.6\textwidth]{ScreenshotNerdDeck.png}
         \caption{Screenshot of the \ac{cli}. Shows start of \textit{NerdDeck}.}
         \label{fig:screenshotcli}
     \end{figure}
@@ -113,11 +112,11 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
 
 \section*{Imperative vs. Declarative}
 
-Within the broader spectrum of programming paradigms, the imperative and declarative styles represent two contrasting approaches to articulating code. In the following the two approaches will be shown on a simple algorithm: summing up a array of numbers.
+Within the broader spectrum of programming paradigms, the imperative and declarative styles represent two contrasting approaches to articulating code. The following will demonstrate both approaches using a simple algorithm for summing up an array of numbers.
 
 \subsubsection{Imperative Approach}
 
-Algorithm \ref{alg:imperative_sum} exemplifies the imperative paradigm, which guides the computer through computations using explicit steps. Each line of pseudocode provides instructions to the computer on how to perform the calculation, adhering to traditional imperative paradigms.
+Algorithm \ref{alg:imperative_sum} is an example of the imperative paradigm. This paradigm guides the computer through computations using explicit steps. Each line of pseudocode provides instructions to the computer on how to perform the calculation, adhering to traditional imperative paradigms. The sum is calculated explicitly in a \textit{for loop} from line three to five.
 
 \begin{algorithm}
     \SetKwInOut{Input}{Input}
@@ -160,16 +159,13 @@ In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_
     \label{alg:declarative_sum}
 \end{algorithm}
 
-The juxtaposition of these algorithms not only highlights the difference in coding philosophy but also serves as a tangible exploration of the imperative and declarative styles within the context of \ac{fp}.
-
-
 \chapter{Introduction to Go and F\#}\label{chap:language-comparison}
 In this chapter, we explore the distinctive features of Go and F\#, offering a brief overview of each language.
 
     \section{Overview of Go}\label{sec:go-overview}
     Go, commonly known as Golang, is employed to build simple, secure, and scalable systems. It is a statically-typed, compiled programming langauge designed by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson in 2007. It is used very widely within big companies like Google, Paypal or Netflix. As an open source language, Go is characterized by: 
     \begin{itemize}
-        \item \textbf{Concurrent programming:}  Native support through goroutines and channels for scalable and parallelized applications.
+        \item \textbf{Concurrent programming:}  Native support through goroutines and channels for scalable and parallelized \ac{app}s.
         \item \textbf{Efficiency:} Statically-typed, compiled that produces standalone binaries. Good for deployment in various environments.
         \item \textbf{Flexibility:} Can be used for Cloud \& Network Services, \ac{cli}s, Web Development and Development Operations \& Site Reliability Engineering.
     \end{itemize}
@@ -277,7 +273,7 @@ let dueFlashcards = List.filter isDueForReview flashcards
 
 
 \chapter{Conclusion}\label{chap:conclusion}
-In the exploration of functional programming paradigms within the context of Go and F\#, this paper aimed to analyze and compare key concepts such as Algebraic Data Types and First-class Functions. The \textit{NerdDeck} Flash Card application served as a practical example to illustrate the application of functional programming principles in both languages. The comparison revealed distinctions in their approaches, showcasing F\#'s native support for functional programming and Go's adaptation within its multi-paradigm framework.
+In the exploration of functional programming paradigms within the context of Go and F\#, this paper aimed to analyze and compare key concepts such as Algebraic Data Types and First-class Functions. The \textit{NerdDeck} Flash Card \ac{app} served as a practical example to illustrate the application of functional programming principles in both languages. The comparison revealed distinctions in their approaches, showcasing F\#'s native support for functional programming and Go's adaptation within its multi-paradigm framework.
     \section{Challenges}\label{sec:challenges}
     The foundation of a good comparison in the context of this paper is to write code as pure as possible to fulfill the paradigm of functional programming. However, challenges arose due to the inherent impurity in both Go and F\#. While F\# aligns more closely with functional programming principles, Go's multi-paradigm nature necessitated creative workarounds to achieve a functional style. This underscored the importance of navigating the balance between functional and imperative programming in each language. The challenges also highlighted the need for a nuanced approach when selecting a language for projects where functional programming principles are a priority.        
 
