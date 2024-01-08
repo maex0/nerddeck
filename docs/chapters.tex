@@ -103,7 +103,7 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
         \item \textbf{First-class Functions:} A powerful technique, elaborated further in Section \ref{sec:first-class-functions}.
     \end{itemize}
     
-    Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like F\# and Go. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:language-comparison}.
+    Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like Go and F\#. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:language-comparison}.
     
     As developers navigate through contrasting algorithms, exploring the interplay between imperative and declarative styles, they reflect on the historical evolution and diversity of \ac{fp} languages. This exploration serves as a testament to the flexibility of programming paradigms and prompts consideration of the nuanced trade-offs between explicit instruction and expressive abstraction within the dynamic context of \ac{fp}.
     
@@ -186,23 +186,21 @@ In this chapter, we explore the distinctive features of Go and F\#, offering a b
 
 
 \chapter{Comparison of functional concepts}\label{chap:comparison}
-In order to compare the two languages, the following two functional concepts are examined in more detail: Algebraic Data Types and First-class Functions. 
+To compare the programming languages Go and F\# in the context of \ac{fp}, we will examine two concepts in more detail: Algebraic Data Types and First-class Functions. 
 
     \section{Algebraic Data Types}\label{sec:algebraic-data-types}
 
-    Algebraic data types (ADTs) are a cornerstone of functional programming, providing a way to model complex data structures. In Go, ADTs are not directly supported as in languages like F\#, which has native support for discriminated unions and pattern matching. In both F\# and Go, the \texttt{FlashCard} type is used to represent a flashcard, capturing essential information such as the card's ID, question, answer, repetition count, easiness factor, and the next review date. Despite serving the same purpose, there are syntactic and structural differences between the implementations in F\# and Go.
+    Algebraic data types are a cornerstone of functional programming, providing a way to model complex data structures. In Go, these types are not directly supported as in languages like F\#, which has native support for discriminated unions and pattern matching. In both Go and F\#, the \texttt{FlashCard} type is used to represent a flashcard, capturing essential information such as the card's ID, question, answer, number of repetitions, ease factor, and the next review date. Despite serving the same purpose, there are syntactic and structural differences between the implementations in Go and F\#.
 
         \subsection*{F\#}
-        F\# provides native support for algebraic data types through discriminated unions. Developers can define a set of related values using a discriminated union, and pattern matching allows for concise and expressive handling of these types. This feature enhances the readability and maintainability of F\# code, making it a powerful tool for developers embracing functional programming.
+        F\# provides native support for algebraic data types through record types and discriminated unions. These enable developers to define a set of related values that can be handled concisely and expressively using pattern matching. This feature enhances the readability and maintainability of F\# code, making it a powerful tool for developers who embrace functional programming.
 
-
-        In listing \ref{l:flashcardfsharp} the \texttt{FlashCard} type is defined using a record type, a lightweight and immutable data structure. The \texttt{FlashCard} record includes fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Records in F\# automatically provide immutability, making them well-suited for representing data with fixed attributes.
-
+        Listing \ref{l:flashcardfsharp} defines the \texttt{FlashCard} from figure \ref{fig:model} using a record type\footnote{Website: \url{https://learn.microsoft.com/dotnet/fsharp/language-reference/records} (Accessed on 01/08/2024)}. The record contains fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Records in F\# provide automatically, making them well-suited for representing data with fixed attributes.
 
         \subsection*{Go}
-        In Go, developers commonly use struct types to represent data structures. While structs provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by ADTs.
+        In Go, developers commonly use \texttt{struct} types to represent data structures. Although they provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by algebraic data types.
 
-        The \texttt{FlashCard} type is defined using a struct. Go structs are mutable, and fields can be updated after the struct's creation. The \texttt{FlashCard} struct includes fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Go uses explicit types for each field, providing a statically typed approach.
+        Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. Go structs are mutable, meaning that fields can be updated after creation. Additionally, Go uses explicit types for each field, providing a statically typed approach.
 
 \begin{figure}[ht]
     \begin{subfigure}{0.48\textwidth}
@@ -236,6 +234,8 @@ In order to compare the two languages, the following two functional concepts are
     Both Go and F\# support first-class functions, treating functions as first-class citizens. In Go, functions can be assigned to variables, passed as arguments, and returned as values. The use of anonymous functions, known as closures, is common in Go, enhancing the functional programming paradigm. Similarly, F\# provides robust support for first-class functions, aligning with its functional programming paradigm. Functions in F\# can be assigned to variables, passed as arguments, and returned as values. The language encourages the use of higher-order functions, enabling powerful abstractions through functions.
 
     \subsection*{F\#}
+    In this F\# example, we define a first-class function \textit{isDueForReview} that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a list of flashcards, to check if a flashcard is due for learning or not. The return value of the function should be a list of due flashcards.
+        
         \begin{lstlisting}[language=fsharp, firstnumber=1,float=tp, caption={First-class function reresentation in F\#}, label=l:flashcardfunction]
 let isDueForReview card =
     card.Repetitions > 0 && card.NextReview <= DateTime.Now
@@ -243,10 +243,10 @@ let isDueForReview card =
 let dueFlashcards = List.filter isDueForReview flashcards
         \end{lstlisting}
         
-        In this F\# example, we define a first-class function `isDueForReview` that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a list of flashcards.
-        
-    \subsection*{Go}    
-        \begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in F\#}, label=l:flashcardfsharp]
+      
+    \subsection*{Go}
+    In the Go example in listing \ref{l:flashcardgo}, we define a first-class function `isDueForReview` that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a slice of flashcards and print the result.   
+        \begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in F\#}, label=l:flashcardgo]
             func isDueForReview(card FlashCard) bool {
                 return card.Repetitions > 0 
                 && card.NextReview.Before(time.Now())
@@ -266,14 +266,13 @@ let dueFlashcards = List.filter isDueForReview flashcards
             dueFlashcards := filterDueFlashcards(cards)
             \end{lstlisting}
             
-            In this Go example, we define a first-class function `isDueForReview` that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a slice of flashcards and print the result.
 
     \section{Key Takeaway}\label{sec:keytakeaway}
-    In conclusion, when it comes to algebraic data types—a fundamental feature in functional programming—F\# excels with its native support for discriminated unions and pattern matching. While Go developers can achieve similar outcomes using struct types and interfaces, F\# provides a more elegant and concise solution. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and functional programming styles.
+    While Go's \texttt{struct} types are mutable by default, F\#'s \texttt{record} types are immutable by default. Immutability simplifies reasoning about state and enables certain optimizations. In addition, it is worth noting that every field in Go must have an explicitly defined type, whereas in F\#, they are inferred based on their usage. Neither language supports inheritance. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and functional programming styles. The difference between the two languages lies in their syntax and expressiveness.
 
 
 \chapter{Conclusion}\label{chap:conclusion}
-In the exploration of functional programming paradigms within the context of Go and F\#, this paper aimed to analyze and compare key concepts such as Algebraic Data Types and First-class Functions. The \textit{NerdDeck} Flash Card \ac{app} served as a practical example to illustrate the application of functional programming principles in both languages. The comparison revealed distinctions in their approaches, showcasing F\#'s native support for functional programming and Go's adaptation within its multi-paradigm framework.
+In the exploration of functional programming paradigms within the context of Go and F\#, this paper aimed to analyze and compare key concepts such as algebraic data types and First-class Functions. The \textit{NerdDeck} Flash Card \ac{app} served as a practical example to illustrate the application of functional programming principles in both languages. The comparison revealed distinctions in their approaches, showcasing F\#'s native support for functional programming and Go's adaptation within its multi-paradigm framework.
     \section{Challenges}\label{sec:challenges}
     The foundation of a good comparison in the context of this paper is to write code as pure as possible to fulfill the paradigm of functional programming. However, challenges arose due to the inherent impurity in both Go and F\#. While F\# aligns more closely with functional programming principles, Go's multi-paradigm nature necessitated creative workarounds to achieve a functional style. This underscored the importance of navigating the balance between functional and imperative programming in each language. The challenges also highlighted the need for a nuanced approach when selecting a language for projects where functional programming principles are a priority.        
 
