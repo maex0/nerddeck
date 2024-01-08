@@ -112,11 +112,11 @@ This spot should be covered by this paper with the comparison of Go and F\# in t
 
 \section*{Imperative vs. Declarative}
 
-Within the broader spectrum of programming paradigms, the imperative and declarative styles represent two contrasting approaches to articulating code. The following will demonstrate both approaches using a simple algorithm for summing up an array of numbers.
+Within the broader spectrum of programming paradigms, the imperative and declarative styles represent two contrasting approaches to articulating code. The following will demonstrate both approaches using a simple algorithm written in pseudo code for summing up an array of numbers.
 
 \subsubsection{Imperative Approach}
 
-Algorithm \ref{alg:imperative_sum} is an example of the imperative paradigm. This paradigm guides the computer through computations using explicit steps. Each line of pseudocode provides instructions to the computer on how to perform the calculation, adhering to traditional imperative paradigms. The sum is calculated explicitly in a \textit{for loop} from line three to five.
+Algorithm \ref{alg:imperative_sum} is an example of the imperative paradigm. This paradigm guides the computer through computations using explicit steps. Each line of pseudo code provides instructions to the computer on how to perform the calculation, adhering to traditional imperative paradigms. The sum is calculated explicitly in a \texttt{for loop} from line three to five.
 
 \begin{algorithm}
     \SetKwInOut{Input}{Input}
@@ -163,7 +163,7 @@ In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_
 In this chapter, we explore the distinctive features of Go and F\#, offering a brief overview of each language.
 
     \section{Overview of Go}\label{sec:go-overview}
-    Go, commonly known as Golang, is employed to build simple, secure, and scalable systems. It is a statically-typed, compiled programming langauge designed by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson in 2007. It is used very widely within big companies like Google, Paypal or Netflix. As an open source language, Go is characterized by: 
+    Go, commonly known as Golang, is employed to build simple, secure, and scalable systems. It is a statically-typed, compiled programming language designed by Google engineers Robert Griesemer, Rob Pike, and Ken Thompson in 2007. It is used very widely within big companies like Google, Paypal or Netflix. As an open source language, Go is characterized by: 
     \begin{itemize}
         \item \textbf{Concurrent programming:}  Native support through goroutines and channels for scalable and parallelized \ac{app}s.
         \item \textbf{Efficiency:} Statically-typed, compiled that produces standalone binaries. Good for deployment in various environments.
@@ -182,7 +182,7 @@ In this chapter, we explore the distinctive features of Go and F\#, offering a b
     \end{itemize}
     \cite{dotnet}
     \cite{keyfeaturesfsharp}
-    Both of the languages are not completely pure.
+    
 
 
 \chapter{Comparison of functional concepts}\label{chap:comparison}
@@ -200,7 +200,7 @@ To compare the programming languages Go and F\# in the context of \ac{fp}, we wi
         \subsection*{Go}
         In Go, developers commonly use \texttt{struct} types to represent data structures. Although they provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by algebraic data types.
 
-        Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. Go structs are mutable, meaning that fields can be updated after creation. Additionally, Go uses explicit types for each field, providing a statically typed approach.
+        Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. This can be seen in listing \ref{l:flashcardgo}. Go structs are mutable, meaning that fields can be updated after creation. Additionally, Go uses explicit types for each field, providing a statically typed approach.
 
 \begin{figure}[ht]
     \begin{subfigure}{0.48\textwidth}
@@ -234,9 +234,9 @@ To compare the programming languages Go and F\# in the context of \ac{fp}, we wi
     Both Go and F\# support first-class functions, treating functions as first-class citizens. In Go, functions can be assigned to variables, passed as arguments, and returned as values. The use of anonymous functions, known as closures, is common in Go, enhancing the \ac{fp} paradigm. Similarly, F\# provides robust support for first-class functions, aligning with its \ac{fp} paradigm. Functions in F\# can be assigned to variables, passed as arguments, and returned as values. The language encourages the use of higher-order functions, enabling powerful abstractions through functions.
 
     \subsection*{F\#}
-    In this F\# example, we define a first-class function \texttt{isDueForReview} that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a list of flashcards, to check if a flashcard is due for learning or not. The return value of the function should be a list of due flashcards. As an example in line four, the function is called on the List.filter function. It takes a predicate of type \texttt{T -> bool} and a list as input and returns a list containing only the elements that satisfy the predicate.\footnote{Website: \url{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html\#filter} (Accessed on 01/08/2024)} Moreover, F\# introduces the pipe operator \texttt{|>}, affording developers the convenience of placing the last argument at the forefront. This operator facilitates a more fluid and readable syntax, as exemplified by \texttt{cards |> List.filter isDueForReview}, where the \texttt{isDueForReview} function is seamlessly applied to the \texttt{cards} list through the pipe operator. This expression is equivalent to line four of listing \ref{l:flashcardfunction}.
+    In the F\# example in listing \ref{l:dueforreviewfsharp}, we define a first-class function \texttt{isDueForReview} that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a list of flashcards, to check if a flashcard is due for learning or not. The return value of the function should be a list of due flashcards. As an example in line four, the function is called on the List.filter function. It takes a predicate of type \texttt{T -> bool} and a list as input and returns a list containing only the elements that satisfy the predicate.\footnote{Website: \url{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html\#filter} (Accessed on 01/08/2024)} Moreover, F\# introduces the pipe operator \texttt{|>}, affording developers the convenience of placing the last argument at the forefront. This operator facilitates a more fluid and readable syntax, as exemplified by \texttt{cards |> List.filter isDueForReview}, where the \texttt{isDueForReview} function is seamlessly applied to the \texttt{cards} list through the pipe operator. This expression is equivalent to line four of listing \ref{l:dueforreviewfsharp}. The same functionality should no be implemented in the Go programming language.
 
-        \begin{lstlisting}[language=fsharp, firstnumber=1,float=tp, caption={First-class function reresentation in F\#}, label=l:flashcardfunction]
+        \begin{lstlisting}[language=fsharp, firstnumber=1,float=tp, caption={First-class function reresentation in F\#}, label=l:dueforreviewfsharp]
 let isDueForReview card =
     card.Repetitions > 0 && card.NextReview <= DateTime.Now
         
@@ -249,7 +249,7 @@ let dueFlashCards = List.filter isDueForReview cards
     
     As an example, line 17 invokes the \texttt{filterDueFlashCards} function with a given set of flashcards (\texttt{cards}) and assigns the resulting list of flashcards due for review to the \texttt{dueFlashCards} variable. This variable encapsulates the outcome of the flashcard filtering process.
 
-        \begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in F\#}, label=l:flashcardgo]
+        \begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in F\#}, label=l:dueforreviewgo]
             func isDueForReview(card FlashCard) bool {
                 return card.Repetitions > 0 
                 && card.NextReview.Before(time.Now())
@@ -271,13 +271,14 @@ let dueFlashCards = List.filter isDueForReview cards
             
 
     \section{Key Takeaway}\label{sec:keytakeaway}
-    While Go's \texttt{struct} types are mutable by default, F\#'s \texttt{record} types are immutable by default. Immutability simplifies reasoning about state and enables certain optimizations. In addition, it is worth noting that every field in Go must have an explicitly defined type, whereas in F\#, they are inferred based on their usage. Neither language supports inheritance. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and \ac{fp} styles. The difference between the two languages lies in their syntax and expressiveness.
+    While Go's \texttt{struct} types are mutable by default, F\#'s \texttt{record} types are immutable by default. Immutability simplifies reasoning about state and enables certain optimizations. It is worth noting that every field in Go must have an explicitly defined type, whereas in F\#, they are inferred based on their usage. Neither language supports inheritance. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and \ac{fp} styles. The difference between the two languages lies in their syntax and expressiveness. This can be seen in each of the four examples in listing \ref{l:flashcardgo}, \ref{l:flashcardfsharp}, \ref{l:dueforreviewfsharp} and \ref{l:dueforreviewgo}.
+ It is worth noting that neither language is completely pure. While Go allows for mutation, even F\#, which is primarily a functional language, permits its use.
 
 
 \chapter{Conclusion}\label{chap:conclusion}
 This paper analyzes and compares key concepts, such as algebraic data types and first-class functions, within the context of \ac{fp} paradigms in Go and F\#. The \textit{NerdDeck} Flash Card \ac{app} served as a practical example to illustrate the application of \ac{fp} principles in both languages. The comparison revealed distinctions in their approaches, showcasing F\#'s native support for \ac{fp} and Go's adaptation within its multi-paradigm framework.
     \section{Challenges}\label{sec:challenges}
-    The foundation of a good comparison in the context of this paper is to write code as pure as possible to fulfill the paradigm of \ac{fp}. However, challenges arose due to the inherent impurity in both Go and F\#. While F\# aligns more closely with \ac{fp} principles, Go's multi-paradigm nature required creative workarounds to achieve a functional style. This emphasizes the importance of navigating the balancing between functional and imperative programming in each language. The challenges also highlight the need for a nuanced approach when selecting a language for projects where \ac{fp} principles are a priority.        
+    The foundation of a good comparison in the context of this paper is to write code as pure as possible to fulfill the paradigm of \ac{fp}. However, challenges arose due to the inherent impurity in both Go and F\#. While F\# aligns more closely with \ac{fp} principles, Go's multi-paradigm nature required creative workarounds to achieve a functional style. This emphasizes the importance of navigating the balancing between functional and imperative programming in each language. The challenges also highlight the need for a nuanced approach when selecting a language for projects where \ac{fp} principles and their advantages are a priority.        
 
     \section{Outlook}\label{sec:outlook}
     Looking ahead, there is potential for further exploration into writing more pure functional code within the \textit{NerdDeck} or similar projects. To achieve this, a pure programming language such as Haskell\footnote{Website: \url{https://www.haskell.org} (Accessed on 12/20/2023)} could be considered. This would involve delving deeper into \ac{fp} concepts and finding innovative solutions within the constraints of a specific language. Additionally, as programming languages and paradigms continue to evolve, ongoing advancements may present new opportunities and challenges for \ac{fp} practitioners. The insights gained from this comparative analysis contribute to a broader understanding of \ac{fp} in diverse language ecosystems and provide a foundation for future exploration and research.
