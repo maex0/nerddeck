@@ -31,4 +31,5 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: ./docs/document.pdf
           asset_name: document.pdf
+          tag: ${{ github.ref }}
           overwrite: true
