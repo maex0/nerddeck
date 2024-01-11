@@ -32,7 +32,7 @@ jobs:
           echo "## ❔ Test results" >> $GITHUB_STEP_SUMMARY
           dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=${{github.workspace}}/coverage.json;CoverletOutput=${{github.workspace}}/coverage' -- RunConfiguration.CollectSourceInformation=true
           dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=${{github.workspace}}/coverage.json;CoverletOutput=${{github.workspace}}/coverage' -- RunConfiguration.CollectSourceInformation=true
-        working-directory: ${{ github.workspace }}/fsharp/NerdDeckFSharp
+        working-directory: /fsharp/NerdDeckFSharp
 
       - name: ReportGenerator
         uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
