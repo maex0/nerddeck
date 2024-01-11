@@ -1,9 +1,6 @@
 name: Build F# Nerddeck
 
-on:
-  push:
-    paths:
-      - fsharp/**
+on: [push]
 
 jobs:
   build:
@@ -33,3 +30,14 @@ jobs:
       - name: Test F#
         run: dotnet test
         working-directory: ${{ github.workspace }}/fsharp/NerdDeckFSharp
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 7.0.x
+          dotnet-quality: 'ga'
+
+      - name: ReportGenerator
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
+        with:
+          reports: cobertura.xml
+          targetdir: coveragereport
