@@ -14,7 +14,12 @@ headings=big,%       A4/B5
 listof=flat,%        improved list of tables
 numbers=noenddot
 ]{scrbook}
+\usepackage{scrhack}
+
 \usepackage{listings}
+
+\usepackage[hyphens]{xurl}
+
 
 \addtokomafont{chapter}{\normalfont\bfseries}
 \addtokomafont{section}{\normalfont\bfseries}
@@ -86,7 +91,7 @@ mutable, if, then, else, cloud, async, static, use, abstract, interface, inherit
   morecomment=[s][\color{greencomments}]{{(*}{*)}},
   morestring=[b]",
   showstringspaces=false,
-  literate={`}{\`}1,
+  literate={`}{`}1,
   stringstyle=\color{redstrings},
 }
 
@@ -160,19 +165,13 @@ mutable, if, then, else, cloud, async, static, use, abstract, interface, inherit
         breaklinks=true]
         {hyperref}
 
-
-%\typearea[current]{calc}
-
-
 % Einstellungen für Bild-/Tabellenbeschriftung neben dem Bild
 \floatsetup[figure]{capbesideposition={inside,top}}
 \floatsetup[table]{capbesideposition={inside,top},style=plaintop}
 \renewfloatcommand{fcapside}{figure}[\capbeside][\FBwidth]
 \newfloatcommand{tcapside}{table}[\capbeside][\FBwidth]
 
-
 \selectlanguage{english}
-
 
 \deffootnote{1em}{1em}{%
 \makebox[1em][l]{\thefootnotemark}}
@@ -182,47 +181,26 @@ mutable, if, then, else, cloud, async, static, use, abstract, interface, inherit
 \newcommand{\real}{\mathord{\mathrm{I\!R}}}
 
 \begin{document}
-\selectlanguage{english}
-\def\figdir{figures}
-%\def\tabledir{tables}
-
-\frontmatter
-
-\pagestyle{scrplain}
-\pagestyle{empty}
-
-\include{title}
-\cleardoubleemptypage
-\include{abstract}
-\cleardoubleemptypage
-
-\pagestyle{scrplain}
-\pagenumbering{roman}
-\include{toc}
-
-\pagestyle{scrheadings}
-
-
-\addtokomafont{caption}{\small}
-
-\mainmatter
-
-\include{chapters}
-
-
-
-\appendix
-\include{append}
-\include{abbreviations}
-\cleardoublepage
-
-\bibliographystyle{natger}
-\bibliography{document}
-
-\cleardoublepage
-
-
-\footnotesize
-\printindex
-
+  \selectlanguage{english}
+  \def\figdir{figures}
+  \def\tabledir{tables}
+  \frontmatter{}
+  \pagestyle{scrplain}
+  \pagestyle{empty}
+  \include{title}
+  \include{abstract}
+  \pagestyle{scrplain}
+  \pagenumbering{roman}
+  \include{toc}
+  \pagestyle{scrheadings}
+  \addtokomafont{caption}{\small}
+  \mainmatter{}
+  \include{chapters}
+  \appendix
+  \include{append}
+  \include{abbreviations}
+  \bibliographystyle{natger}
+  \bibliography{document}
+  \footnotesize
+  \printindex
 \end{document}

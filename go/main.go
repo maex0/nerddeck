@@ -51,8 +51,8 @@ func printMainMenu() {
 	fmt.Println("\n\n================================")
 	fmt.Println("Main Menu:")
 	fmt.Println("0. Instructions")
-	fmt.Println("1. Add Flash Card")
-	fmt.Println("2. View Flash Cards")
+	fmt.Println("1. Add flashcard")
+	fmt.Println("2. View flashcards")
 	fmt.Println("3. Start Learning")
 	fmt.Println("4. Exit")
 	fmt.Println("================================\n\n")
@@ -76,9 +76,9 @@ func printWelcomeMessage() {
 
 func printInstructions() {
 	fmt.Println("\nInstructions:")
-	fmt.Println("1. Add Flash Card: Enter a question and answer to create a new flash card.")
-	fmt.Println("2. View Flash Cards: Display all existing flash cards.")
-	fmt.Println("3. Start Learning: Review flash cards that are due for learning today.")
+	fmt.Println("1. Add flashcard: Enter a question and answer to create a new flashcard.")
+	fmt.Println("2. View flashcards: Display all existing flashcards.")
+	fmt.Println("3. Start Learning: Review flashcards that are due for learning today.")
 	fmt.Println("   - Press Enter to reveal the answer.")
 	fmt.Println("   - Rate your memory from 1 to 4:")
 	fmt.Println("     - 1: I don't remember at all. :(")
@@ -86,7 +86,7 @@ func printInstructions() {
 	fmt.Println("     - 3: I remember well.         :)")
 	fmt.Println("     - 4: I remember perfectly.    :D")
 	fmt.Println("   - The SM2 spaced repetition algorithm will adjust the card's review interval.")
-	fmt.Println("4. Exit: Save flash cards and exit the application.")
+	fmt.Println("4. Exit: Save flashcards and exit the application.")
 	fmt.Println("================================\n\n")
 }
 
@@ -109,13 +109,13 @@ func addFlashCard(cards []flashcards.FlashCard) ([]flashcards.FlashCard, error) 
 		return cards, fmt.Errorf("Error saving flashcards: %v", err)
 	}
 
-	fmt.Println("Flash card added successfully!")
+	fmt.Println("Flashcard added successfully!")
 	return cards, nil
 }
 
 func viewFlashCards(cards []flashcards.FlashCard) {
 	if len(cards) == 0 {
-		fmt.Println("No flash cards available. Add some cards first.")
+		fmt.Println("No flashcards available. Add some cards first.")
 		return
 	}
 	for i, card := range cards {
@@ -125,7 +125,7 @@ func viewFlashCards(cards []flashcards.FlashCard) {
 
 func startLearning(cards []flashcards.FlashCard) ([]flashcards.FlashCard, error) {
 	if len(cards) == 0 {
-		return cards, fmt.Errorf("No flash cards available. Add some cards first.")
+		return cards, fmt.Errorf("No flashcards available. Add some cards first.")
 	}
 
 	// Check for due flashcards based on the current date
@@ -135,7 +135,7 @@ func startLearning(cards []flashcards.FlashCard) ([]flashcards.FlashCard, error)
 		fmt.Println("No flashcards are due for review today.")
 		return cards, fmt.Errorf("No flashcards are due for review today.")
 	}
-	fmt.Println("Due Flash Cards:")
+	fmt.Println("Due flashcards:")
 	fmt.Println("Starting Learning Mode. You got this :)")
 	for _, dueCard := range dueFlashcards {
 		card := flashcards.FindCardByID(cards, dueCard.ID)
