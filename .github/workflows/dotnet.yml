@@ -37,7 +37,6 @@ jobs:
           echo "## ❔ Test results" >> $GITHUB_STEP_SUMMARY
           dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=$/coverage.json;CoverletOutput=$/coverage' -- RunConfiguration.CollectSourceInformation=true
           dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=$/coverage.json;CoverletOutput=$/coverage' -- RunConfiguration.CollectSourceInformation=true
-        working-directory: /fsharp/NerdDeckFSharp
 
       - name: 📝 Code Coverage report
         run: |
