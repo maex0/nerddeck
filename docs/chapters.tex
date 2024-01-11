@@ -1,21 +1,22 @@
 \chapter{Introduction}\label{chap:introduction}
 This paper is written for the master course \textit{Concepts of Programming Languages} of the department of computer science in the Winter Term 23/24 at the Technical University of Applied Sciences Rosenheim.
+    
     \section{Background}\label{sec:background}
-As of the TIOBE Index data as of November 2023, it is reported that there are currently over 150 programming languages in existence. This implies that, up until the present moment, the programming landscape continues to encompass a diverse array of languages, reflecting the dynamic and ever-evolving nature of the field.\cite{Tiobeindex} The task of a software engineer at a certain point in the production of software is to select one of these programming languages that is suitable for a particular problem. This can be a science in itself. This very topic has been discussed for around 50 years.\cite{Tharp1982}
-The reason for that is that every language has its own paradigms and concepts. One can come up with a solution, selecting a language which fits a lot of problems but not a single one perfect. Or he selects one which fits perfect for a single problem but it is not possible to solve all the other problems.
-So the goal would be to select the \textit{right} programming language which suits the requirements and the surrounding of a given problem accordingly.
-This spot should be covered by this paper with the comparison of Go and F\# in the context of \ac{fp}.
+    According to the November 2023 TIOBE Index data, there are currently over 150 programming languages in existence. The programming landscape includes a diverse array of languages, reflecting the dynamic and ever-evolving nature of the field.\cite{Tiobeindex} When producing software, a software engineer must select a programming language that is suitable for a particular problem. This topic has been discussed for approximately 50 years.\cite{Tharp1982} The reason for this is that each language has its own paradigms and concepts. While there is no perfect language that can solve all problems, one can choose a language that fits many problems or one that is perfect for a single problem. The goal of selecting the appropriate programming language is to find one that suits the requirements and context of a given problem. This paper compares Go and F\# in the context of functional programming (FP) to cover this topic.
 
     \section{Purpose of the Project}\label{sec:purpose}
-    The object of this project is to analyze and compare the similarities and differences between two \ac{fp} languages. The selected languages for this comparative study are Go\footnote{Website: \url{https://go.dev} (Accessed on 12/02/2023)} and F\#\footnote{Website: \url{https://dotnet.microsoft.com/languages/fsharp} (Accessed on 12/02/2023)}. Go was chosen as the initial language due to its consistent usage throughout the course, making it mandatory inclusion in the project. 
-    In addition to Go, a second programming language is essential for the comparative analysis, and F\# has been selected for this purpose. The inclusion of F\# in this study was a deliberate choice, as explained in section \ref{sec:whyfsharp}. By juxtaposing Go and F\#, the project aims to unravel the nuances and divergences in their approaches to \ac{fp} paradigms, shedding light on their distinctive features, strengths, and potential use cases. Through this comparative exploration, the project seeks to contribute valuable insights into the \ac{fp} landscape, providing a nuanced understanding of the strengths and trade-offs associated with these two languages.
+    The aim of this project is to analyze and compare the similarities and differences between two \ac{fp} languages: Go\footnote{Website: \url{https://go.dev} (Accessed on 12/02/2023)} and F\#\footnote{Website: \url{https://dotnet.microsoft.com/languages/fsharp} (Accessed on 12/02/2023)}. Go was chosen as the initial language due to its consistent usage throughout the course, making it a mandatory inclusion in the project. In order to conduct a comparative analysis, it is essential to include a second programming language alongside Go. For this purpose, F\# has been selected. The decision to include F\# in this study was deliberate, as explained in section \ref{sec:whyfsharp}. By comparing Go and F\#, this project aims to uncover the nuances and divergences in their approaches to \ac{fp} paradigms, shedding light on their distinctive features, strengths, and potential use cases. Through this comparative exploration, the project aims to provide valuable insights into the \ac{fp} landscape. It seeks to offer a nuanced understanding of the strengths and trade-offs associated with both languages.
 
     \section{Why F\#?}\label{sec:whyfsharp}
-    One of the key reasons for choosing F\# is its status as a functional-first programming language. In contrast to Go's multi-paradigm approach, F\#'s commitment to functional principles provides an excellent opportunity to explore the benefits of implementing code from a pure perspective.
-    For a more in-depth understanding of F\#, including its syntax, features, and \ac{fp} principles, readers are encouraged to refer to section \ref{sec:fsharp-overview} and chapter \ref{chap:comparison}.
+    One of the main reasons for selecting F\# is its status as a functional-first programming language. Unlike Go's multi-paradigm approach, F\# is committed to functional principles, providing an excellent opportunity to explore the benefits of implementing code from a pure perspective.
+    For a more comprehensive understanding of F\#, including its syntax, features, and \ac{fp} principles, please refer to section\ \ref{sec:fsharp-overview} and chapter\ \ref{chap:comparison}.
 
     \section{Roadmap}\label{sec:roadmap}
-    Embedded within this exploration about \ac{fp} is a brief discussion of the \textit{NerdDeck} Flash Card \ac{app} in chapter 2, our practical context for understanding \ac{fp} in action. Besides of that this paper navigates a concise roadmap to compare \ac{fp} in Go and F\#, anchored by an initial overview of \ac{fp} principles in chapter 3. It then swiftly transitions to individual language analyses in chapter 4, spotlighting key design philosophies and features of Go and F\#. The centerpiece is chapter 5, a focused exploration of two critical functional concepts: Algebraic Data Types and First-class Functions. Leveraging code examples, this section illuminates nuances in implementation, providing a succinct yet insightful comparative analysis. The paper concludes in chapter 6, summarizing challenges and outlook from both the project and the comparison. This streamlined roadmap ensures a comprehensive yet condensed examination of \ac{fp} in Go and F\#.
+    Chapter\ \ref{chap:project-overview} briefly discusses the \textit{NerdDeck} Flash Card \ac{app} as a practical context for understanding \ac{fp} in action. Chapter\ \ref{chap:functional-programming} provides an overview of \ac{fp} principles, followed by an introduction to Go and F\# of \ac{fp} in chapter\ \ref{chap:introgoandfsharp}. Chapter\ \ref{chap:comparison} is the centerpiece of this paper, as it provides a focused exploration of two critical functional concepts: Algebraic Data Types and First-class Functions. This section uses code examples to illuminate nuances in implementation, providing a concise yet insightful comparative analysis. The paper concludes in chapter\ \ref{chap:conclusion}, summarizing challenges and outlook from both the project and the comparison. This streamlined roadmap ensures
+    a comprehensive yet condensed examination of \ac{fp} in Go and F\#.
+
+
+%========================================================CHAPTER 2========================================================
 
 \chapter{Project Overview}\label{chap:project-overview}
     \section{Description of the \textit{NerdDeck} Flash Card Application}\label{sec:description}
@@ -107,7 +108,7 @@ Key principles integral to \ac{fp} include:
     \item \textbf{First-class Functions:} A powerful technique, elaborated further in Section \ref{sec:first-class-functions}.
 \end{itemize}
 
-Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like Go and F\#. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:language-comparison}.
+Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like Go and F\#. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:introgoandfsharp}.
 
 As developers navigate through contrasting algorithms, exploring the interplay between imperative and declarative styles, they reflect on the historical evolution and diversity of \ac{fp} languages. This exploration serves as a testament to the flexibility of programming paradigms and prompts consideration of the nuanced trade-offs between explicit instruction and expressive abstraction within the dynamic context of \ac{fp}.
 
@@ -146,7 +147,7 @@ Algorithm \ref{alg:imperative_sum} is an example of the imperative paradigm. Thi
 
 \subsubsection{Declarative Approach}
 
-In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_sum}, shifts the emphasis from detailing step-by-step procedures to expressing the desired outcome directly. This approach, a hallmark of \ac{fp}, leverages the power of functions and abstraction. Later on in chapter \ref{chap:language-comparison} we will discover a similar short syntax while using F\#.
+In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_sum}, shifts the emphasis from detailing step-by-step procedures to expressing the desired outcome directly. This approach, a hallmark of \ac{fp}, leverages the power of functions and abstraction. Later on in chapter \ref{chap:introgoandfsharp} we will discover a similar short syntax while using F\#.
 
 \begin{algorithm}
     \SetKwInOut{Input}{Input}
@@ -163,7 +164,7 @@ In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_
     \label{alg:declarative_sum}
 \end{algorithm}
 
-\chapter{Introduction to Go and F\#}\label{chap:language-comparison}
+\chapter{Introduction to Go and F\#}\label{chap:introgoandfsharp}
 In this chapter, we explore the distinctive features of Go and F\#, offering a brief overview of each language.
 
     \section{Overview of Go}\label{sec:go-overview}
