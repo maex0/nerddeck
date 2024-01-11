@@ -30,7 +30,7 @@ ehthumbs.db
 *.blg
 *.log
 *.out
-*.pdf
+logo*.pdf
 *.toc
 *.idx
 *.ilg
