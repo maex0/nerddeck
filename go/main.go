@@ -55,7 +55,7 @@ func printMainMenu() {
 	fmt.Println("2. View flashcards")
 	fmt.Println("3. Start Learning")
 	fmt.Println("4. Exit")
-	fmt.Println("================================\n\n")
+	fmt.Println("================================")
 }
 
 func printWelcomeMessage() {
@@ -87,7 +87,7 @@ func printInstructions() {
 	fmt.Println("     - 4: I remember perfectly.    :D")
 	fmt.Println("   - The SM2 spaced repetition algorithm will adjust the card's review interval.")
 	fmt.Println("4. Exit: Save flashcards and exit the application.")
-	fmt.Println("================================\n\n")
+	fmt.Println("================================")
 }
 
 func addFlashCard(cards []flashcards.FlashCard) ([]flashcards.FlashCard, error) {

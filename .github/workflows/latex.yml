@@ -1,4 +1,4 @@
-name: Build- and Release LaTeX paper
+name: Build LaTeX paper
 
 on:
   push:

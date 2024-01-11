@@ -28,7 +28,7 @@ This repository is dedicated to exploring the paradigms of functional programmin
 
 ## Paper
 
-I wrote a paper for this project, it contains an introduction for functional programming, for Go and F# and also for the coding project _NerdDeck_. This paper was written in LaTeX and can be found here [here](./docs/).
+I wrote a paper for this project, it contains an introduction for functional programming, for Go and F# and also for the coding project _NerdDeck_. This paper was written in LaTeX and can be found here [here](./docs/document.pdf).
 
 ## Getting Started
 
@@ -36,22 +36,24 @@ This section is about how you can execute the code by yourself. Note that _NerdD
 
 ### Go
 
-- Verify that you have installed everything which is necessary Go on your system (info can be found here)
-- Clone the repository:
+- Verify that you have installed everything which is necessary for Go on your system (info can be found [here](https://go.dev/doc/install))
+- I used **go version go1.21.2 darwin/arm64** on my system
+- If you have Go installed successfully clone the repository:
   `git clone https://github.com/maex0/nerddeck.git`
 - Navigate to the project directory: `cd nerddeck`
 - Navigate to the go project directory: `cd go`
-- Execute and verify there are no build errors
-- Execute and enjoy _NerdDeck_
+- Build the project with `go build`
+- Execute with `./nerddeck` and enjoy _NerdDeck_
 
 ### F# <a id="fsharp"></a>
 
-- Verify that you have installed everything which is necessary F# on your system. [.NET 7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) is used.
+- Verify that you have installed everything which is necessary F# on your system. I used [.NET 7](https://dotnet.microsoft.com/en-us/download/dotnet/7.0) on my system
 - Clone the repository:
   `git clone https://github.com/maex0/nerddeck.git`
-- Navigate to the go project directory: `cd fsharp/NerdDeckFSharp`
+- Navigate to the go project directory: `cd fsharp`
 - Execute `dotnet build` and verify there are no build errors
-- Execute `dotnet run` and enjoy _NerdDeck_
+- Execute `dotnet publish -c Release -r osx-x64 --output ./Release ./src/App/App.fsproj` and enjoy _NerdDeck_ (I used osx-x64 because I use a mac. For Windows or Linux users look for [dotnet publish documentation](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-publish) and [different runtimes](https://learn.microsoft.com/en-us/dotnet/core/rid-catalog))
+- Go into the folder with `./Release`, execute with `./NerdDeck` and enjoy _NerdDeck_
 
 ## Database
 
@@ -78,7 +80,7 @@ The flashcard data is stored in a JSON file with the following structure:
 
 ## Model
 
-ID is the primary key, generated from question and answer.
+In order to meet the requirements, a flashcard model is necessary. It is crucial that users are able to create multiple flashcards and validate that there are no duplicates of the question-answer combination. The ID is generated from the question and answer of the flashcard, serving as a primary key for the model. This model should be used in both languages.
 
 ![Nerddeck model](./images/NerddeckModel.png)
 

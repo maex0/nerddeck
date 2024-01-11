@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// Constants for the SM2 algorithm
 const (
 	defaultRepetition = 0
 	defaultEFactor    = 2.5
@@ -20,6 +21,7 @@ const (
 	gradeFour         = 4
 )
 
+// FlashCard represents a flashcard with a question, answer, and SM2 algorithm parameters
 type FlashCard struct {
 	ID          string
 	Question    string
@@ -63,6 +65,7 @@ func (card *FlashCard) ApplySM2Algorithm(grade string) {
 	}
 }
 
+// convertGrade converts the given grade to an integer and validates it
 func convertGrade(grade string) int {
 	numericGrade, err := strconv.Atoi(grade)
 	if err != nil || numericGrade < GradeOne || numericGrade > gradeFour {
@@ -73,6 +76,7 @@ func convertGrade(grade string) int {
 	return numericGrade
 }
 
+// GenerateID generates a unique ID for a flashcard based on its question and answer
 func GenerateID(question, answer string) string {
 	// Concatenate question and answer
 	data := []byte(question + answer)
