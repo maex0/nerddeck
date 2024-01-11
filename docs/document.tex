@@ -14,7 +14,12 @@ headings=big,%       A4/B5
 listof=flat,%        improved list of tables
 numbers=noenddot
 ]{scrbook}
+\usepackage{scrhack}
+
 \usepackage{listings}
+
+\usepackage[hyphens]{xurl}
+
 
 \addtokomafont{chapter}{\normalfont\bfseries}
 \addtokomafont{section}{\normalfont\bfseries}
@@ -86,7 +91,7 @@ mutable, if, then, else, cloud, async, static, use, abstract, interface, inherit
   morecomment=[s][\color{greencomments}]{{(*}{*)}},
   morestring=[b]",
   showstringspaces=false,
-  literate={`}{\`}1,
+  literate={`}{`}1,
   stringstyle=\color{redstrings},
 }
 
