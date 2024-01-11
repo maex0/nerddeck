@@ -80,7 +80,7 @@ The flashcard data is stored in a JSON file with the following structure:
 
 ## Model
 
-ID is the primary key, generated from question and answer.
+In order to meet the requirements, a flashcard model is necessary. It is crucial that users are able to create multiple flashcards and validate that there are no duplicates of the question-answer combination. The ID is generated from the question and answer of the flashcard, serving as a primary key for the model. This model should be used in both languages.
 
 ![Nerddeck model](./images/NerddeckModel.png)
 
