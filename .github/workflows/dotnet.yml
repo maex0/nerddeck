@@ -33,6 +33,4 @@ jobs:
         with:
           dotnet-version: '7.0.x'
       - name: Test F#
-        run: |
-          echo "## Test results" >> $GITHUB_STEP_SUMMARY
-          dotnet test --configuration Release -v minimal --no-build
+        run: dotnet test
