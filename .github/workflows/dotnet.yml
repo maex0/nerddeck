@@ -35,4 +35,4 @@ jobs:
       - name: Test F#
         run: |
           echo "## Test results" >> $GITHUB_STEP_SUMMARY
-          dotnet test --configuration Release -v minimal --no-build --logger
+          dotnet test --configuration Release -v minimal --no-build
