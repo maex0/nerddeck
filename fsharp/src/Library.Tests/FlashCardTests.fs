@@ -1,4 +1,4 @@
-module Library.Tests
+module Tests
 
 open NUnit.Framework
 open FlashCard

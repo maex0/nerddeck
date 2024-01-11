@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Compile Include="FlashCardTests.fs" />
-    <Compile Include="Program.fs" />
   </ItemGroup>
 
   <ItemGroup>
