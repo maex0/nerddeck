@@ -10,7 +10,7 @@ Welcome to _NerdDeck_, a project initiated during the first semester of my Maste
 
 This repository is dedicated to exploring the paradigms of functional programming in the context of two distinct programming languages: Go and F#.
 
-<img src="ScreenshotNerdDeck.png" alt="ScreenshotNerdDeck" width="500"/>
+<img src="./images/ScreenshotNerdDeck.png" alt="ScreenshotNerdDeck" width="500"/>
 
 ## Table of Contents
 
@@ -80,7 +80,7 @@ The flashcard data is stored in a JSON file with the following structure:
 
 ID is the primary key, generated from question and answer.
 
-![Nerddeck model](NerddeckModel.png)
+![Nerddeck model](./images/NerddeckModel.png)
 
 ## Contributing
 
