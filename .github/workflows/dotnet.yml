@@ -34,14 +34,5 @@ jobs:
           dotnet-version: '7.0.x'
       - name: Test F#
         run: |
-          echo "## ❔ Test results" >> $GITHUB_STEP_SUMMARY
-          dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=$/coverage.json;CoverletOutput=$/coverage' -- RunConfiguration.CollectSourceInformation=true
-          dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=$/coverage.json;CoverletOutput=$/coverage' -- RunConfiguration.CollectSourceInformation=true
-
-      - name: 📝 Code Coverage report
-        run: |
-          dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.23
-          reportgenerator -reports:${{github.workspace}}/coverage.cobertura.xml -targetdir:${{github.workspace}}/report -reporttypes:MarkdownSummaryGithub "-filefilters:-*.g.cs;-*.gen.cs" -verbosity:Warning
-          sed -i 's/# Summary/## 📝 Code Coverage/g' ${{github.workspace}}/report/SummaryGithub.md
-          sed -i 's/## Coverage/### Code Coverage details/g' ${{github.workspace}}/report/SummaryGithub.md
-          cat ${{github.workspace}}/report/*.md >> $GITHUB_STEP_SUMMARY
+          echo "## Test results" >> $GITHUB_STEP_SUMMARY
+          dotnet test --configuration Release -v minimal --no-build --logger
