@@ -90,41 +90,30 @@ This paper is written for the master course \textit{Concepts of Programming Lang
 %========================================================CHAPTER 3========================================================
 
 \chapter{Overview of functional programming}\label{chap:functional-programming}
-    \begin{shaded}
-        \noindent
-        \glqq{}As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularized. Functional languages push those limits back.\grqq{} \cite{Hughes1989}
-    \end{shaded}
-    This should be the motivation considering the usage of \ac{fp}.
-    Within the paradigm of \ac{fp}, developers engage with principles that underscore the pursuit of expressive and concise solutions.
+\begin{shaded}
+    \noindent
+    \glqq{}As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularized. Functional languages push those limits back.\grqq{} \cite{Hughes1989}
+\end{shaded}
+
+The motivation for using \ac{fp} should be considered. Within the paradigm of \ac{fp}, developers adhere to principles that prioritize the creation of expressive and concise solutions.
     
-\section{Key principles}
-    
-Rooted in mathematical concepts like lambda calculus, \ac{fp} emerges as a methodology characterized by rigor and elegance.
+    \section{Key principles}
+    Rooted in mathematical concepts like lambda calculus, \ac{fp} emerges as a methodology characterized by rigor and elegance.
+    Key principles integral to \ac{fp} include:
+    \begin{itemize}
+        \item \textbf{Purity:} Strict avoidance of side effects to ensure deterministic behavior.
+        \item \textbf{Higher-order functions:} Utilization of functions as parameters and return values for enhanced modularity.
+        \item \textbf{Lazy evaluation:} Selective computation, evaluating values only when necessary for optimization.
+        \item \textbf{Algebraic data types:} Incorporation of sum- and product-types, as discussed in more detail in Section\ \ref{sec:algebraic-data-types}.
+        \item \textbf{First-class Functions:} A powerful technique, elaborated further in Section\ \ref{sec:first-class-functions}.
+    \end{itemize}
+    \ac{fp} has a rich history dating back to 1950 with the introduction of the language LISP. Since then, \ac{fp} has evolved across various programming languages, such as like Go and F\#. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles. In contrast, Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Chapter\ \ref{chap:introgoandfsharp} provides further insights into this topic. As developers navigate through contrasting algorithms, they reflect on the historical evolution and diversity of \ac{fp} languages. This exploration serves as a testament to the flexibility of programming paradigms and prompts consideration of the nuanced trade-offs between explicit instruction and expressive abstraction within the dynamic context of \ac{fp}. In conclusion, \ac{fp} provides professionals with a robust set of tools, emphasizing immutability, higher-order functions, and mathematical principles.\ \ac{fp} not only addresses current challenges in software development but also promotes a deeper understanding of the complexities involved in designing robust, modular, and expressive code.
 
-Key principles integral to \ac{fp} include:
+    \section{Imperative vs. Declarative}
+    Within the programming paradigm spectrum, the imperative and declarative styles represent contrasting approaches to articulating code. This text will demonstrate both approaches using a simple algorithm written in pseudocode for summing up an array of numbers.
 
-\begin{itemize}
-    \item \textbf{Purity:} Strict avoidance of side effects to ensure deterministic behavior.
-    \item \textbf{Higher-order functions:} Utilization of functions as parameters and return values for enhanced modularity.
-    \item \textbf{Lazy evaluation:} Selective computation, evaluating values only when necessary for optimization.
-    \item \textbf{Algebraic data types:} Incorporation of sum- and product-types, as discussed in more detail in Section \ref{sec:algebraic-data-types}.
-    \item \textbf{First-class Functions:} A powerful technique, elaborated further in Section \ref{sec:first-class-functions}.
-\end{itemize}
-
-Originating in 1950 with the introduction of the impure language LISP, \ac{fp} has evolved across languages like Go and F\#. F\# strictly adheres to a functional-first approach, emphasizing immutability and mathematical principles, while Go incorporates impure functional elements, showcasing the adaptability of \ac{fp} principles. Additional insights into this topic are expounded upon in Chapter \ref{chap:introgoandfsharp}.
-
-As developers navigate through contrasting algorithms, exploring the interplay between imperative and declarative styles, they reflect on the historical evolution and diversity of \ac{fp} languages. This exploration serves as a testament to the flexibility of programming paradigms and prompts consideration of the nuanced trade-offs between explicit instruction and expressive abstraction within the dynamic context of \ac{fp}.
-
-In conclusion, \ac{fp} equips professionals with a robust set of tools, emphasizing immutability, higher-order functions, and mathematical principles. It not only addresses contemporary challenges in software development but also fosters a deeper understanding of the intricacies involved in designing robust, modular, and expressive code.
-    
-
-\section{Imperative vs. Declarative}
-
-Within the broader spectrum of programming paradigms, the imperative and declarative styles represent two contrasting approaches to articulating code. The following will demonstrate both approaches using a simple algorithm written in pseudo code for summing up an array of numbers.
-
-\subsubsection{Imperative Approach}
-
-Algorithm \ref{alg:imperative_sum} is an example of the imperative paradigm. This paradigm guides the computer through computations using explicit steps. Each line of pseudo code provides instructions to the computer on how to perform the calculation, adhering to traditional imperative paradigms. The sum is calculated explicitly in a \texttt{for loop} from line three to five.
+    \subsubsection{Imperative Approach}
+    Algorithm\ \ref{alg:imperative_sum} exemplifies the imperative paradigm. This paradigm directs the computer through computations using explicit steps. Each line of pseudocode provides instructions to the computer on how to perform the calculation, adhering to traditional imperative paradigms. The sum is explicitly calculated in a \texttt{for loop} from line three to five.
 
 \begin{algorithm}
     \SetKwInOut{Input}{Input}
@@ -144,13 +133,12 @@ Algorithm \ref{alg:imperative_sum} is an example of the imperative paradigm. Thi
     
     \Return $result$
     
-    \caption{Imperative way of summing up an integer array}
-    \label{alg:imperative_sum}
+    \caption{Imperative way of summing up an integer array}\label{alg:imperative_sum}
 \end{algorithm}
 
 \subsubsection{Declarative Approach}
 
-In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_sum}, shifts the emphasis from detailing step-by-step procedures to expressing the desired outcome directly. This approach, a hallmark of \ac{fp}, leverages the power of functions and abstraction. Later on in chapter \ref{chap:introgoandfsharp} we will discover a similar short syntax while using F\#.
+In contrast, the declarative style, demonstrated by Algorithm\ \ref{alg:declarative_sum}, emphasizes expressing the desired outcome directly rather than detailing step-by-step procedures. This approach is a hallmark of \ac{fp}, leverages the power of functions and abstraction. In chapter\ \ref{chap:introgoandfsharp}, we will encounter a similar concise syntax while using F\#.
 
 \begin{algorithm}
     \SetKwInOut{Input}{Input}
@@ -168,6 +156,7 @@ In contrast, the declarative style, showcased by Algorithm \ref{alg:declarative_
 \end{algorithm}
 
 
+%========================================================CHAPTER 4========================================================
 
 \chapter{Introduction to Go and F\#}\label{chap:introgoandfsharp}
 In this chapter, we explore the distinctive features of Go and F\#, offering a brief overview of each language.
@@ -192,8 +181,9 @@ In this chapter, we explore the distinctive features of Go and F\#, offering a b
     \end{itemize}
     \cite{Dotnet}
     \cite{Keyfeaturesfsharp}
-    
 
+
+%========================================================CHAPTER 5========================================================
 
 \chapter{Comparison of functional concepts}\label{chap:comparison}
 To compare the programming languages Go and F\# in the context of \ac{fp}, we will examine two concepts in more detail: Algebraic Data Types and First-class Functions. 
@@ -202,15 +192,15 @@ To compare the programming languages Go and F\# in the context of \ac{fp}, we wi
 
     Algebraic data types are a cornerstone of \ac{fp}, providing a way to model complex data structures. In Go, these types are not directly supported as in languages like F\#, which has native support for discriminated unions and pattern matching. In both Go and F\#, the \texttt{FlashCard} type is used to represent a flashcard, capturing essential information such as the card's ID, question, answer, number of repetitions, ease factor, and the next review date. Despite serving the same purpose, there are syntactic and structural differences between the implementations in Go and F\#.
 
-        \subsection*{F\#}
-        F\# provides native support for algebraic data types through record types and discriminated unions. These enable developers to define a set of related values that can be handled concisely and expressively using pattern matching. This feature enhances the readability and maintainability of F\# code, making it a powerful tool for developers who embrace \ac{fp}.
+    \subsection*{F\#}
+    F\# provides native support for algebraic data types through record types and discriminated unions. These enable developers to define a set of related values that can be handled concisely and expressively using pattern matching. This feature enhances the readability and maintainability of F\# code, making it a powerful tool for developers who embrace \ac{fp}.
 
-        Listing \ref{l:flashcardfsharp} defines the \texttt{FlashCard} from figure \ref{fig:model} using a record type\footnote{Website: \url{https://learn.microsoft.com/dotnet/fsharp/language-reference/records} (Accessed on 01/08/2024)}. The record contains fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Records in F\# provide automatically, making them well-suited for representing data with fixed attributes.
+    Listing \ref{l:flashcardfsharp} defines the \texttt{FlashCard} from figure \ref{fig:model} using a record type\footnote{Website: \url{https://learn.microsoft.com/dotnet/fsharp/language-reference/records} (Accessed on 01/08/2024)}. The record contains fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Records in F\# provide automatically, making them well-suited for representing data with fixed attributes.
 
-        \subsection*{Go}
-        In Go, developers commonly use \texttt{struct} types to represent data structures. Although they provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by algebraic data types.
+    \subsection*{Go}
+    In Go, developers commonly use \texttt{struct} types to represent data structures. Although they provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by algebraic data types.
 
-        Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. This can be seen in listing \ref{l:flashcardgo}. Go structs are mutable, meaning that fields can be updated after creation. Additionally, Go uses explicit types for each field, providing a statically typed approach.
+    Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. This can be seen in listing \ref{l:flashcardgo}. Go structs are mutable, meaning that fields can be updated after creation. Additionally, Go uses explicit types for each field, providing a statically typed approach.
 
 \begin{figure}[ht]
 \begin{subfigure}{0.48\textwidth}
@@ -236,8 +226,7 @@ type FlashCard =
     NextReview : DateTime }
 \end{lstlisting}
 \end{subfigure}
-\caption{Comparison of FlashCard representations in Go and F\#}
-\label{fig:flashcardcomparison}
+\caption{Comparison of FlashCard representations in Go and F\#}\label{fig:flashcardcomparison}
 \end{figure}
 
     \section{First-class Functions}\label{sec:first-class-functions}
@@ -253,7 +242,6 @@ let isDueForReview card =
 let dueFlashCards = List.filter isDueForReview cards
 \end{lstlisting}
         
-      
     \subsection*{Go}
     In the Go example in listing \ref{l:flashcardgo}, we define the same first-class function \texttt{isDueForReview} than in F\# that checks if a flashcard is due for review based on specific criteria. The filter function from line six called \texttt{filterDueFlashCards} takes a slice of flashcards (\texttt{cards}) and applies the \texttt{isDueForReview} function to filter out only those flashcards that meet the review criteria. The filtered flashcards are then collected in the \texttt{dueFlashCards} slice and will be returned when all cards are covered.
     
@@ -281,12 +269,14 @@ dueFlashCards := filterDueFlashCards(cards)
             
 
     \section{Key Takeaway}\label{sec:keytakeaway}
-    While Go's \texttt{struct} types are mutable by default, F\#'s \texttt{record} types are immutable by default. Immutability simplifies reasoning about state and enables certain optimizations. It is worth noting that every field in Go must have an explicitly defined type, whereas in F\#, they are inferred based on their usage. Neither language supports inheritance. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and \ac{fp} styles. The difference between the two languages lies in their syntax and expressiveness. This can be seen in each of the four examples in listing \ref{l:flashcardgo}, \ref{l:flashcardfsharp}, \ref{l:dueforreviewfsharp} and \ref{l:dueforreviewgo}.
- It is worth noting that neither language is completely pure. While Go allows for mutation, even F\#, which is primarily a functional language, permits its use.
+    While Go's \texttt{struct} types are mutable by default, F\#'s \texttt{record} types are immutable by default. Immutability simplifies reasoning about state and enables certain optimizations. It is worth noting that every field in Go must have an explicitly defined type, whereas in F\#, they are inferred based on their usage. Neither language supports inheritance. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and \ac{fp} styles. The difference between the two languages lies in their syntax and expressiveness. This can be seen in each of the four examples in listing \ref{l:flashcardgo}, \ref{l:flashcardfsharp}, \ref{l:dueforreviewfsharp} and \ref{l:dueforreviewgo}. It is worth noting that neither language is completely pure. While Go allows for mutation, even F\#, which is primarily a functional language, permits its use.
 
+
+%========================================================CHAPTER 5========================================================
 
 \chapter{Conclusion}\label{chap:conclusion}
 This paper analyzes and compares key concepts, such as algebraic data types and first-class functions, within the context of \ac{fp} paradigms in Go and F\#. The \textit{NerdDeck} flashcard \ac{app} served as a practical example to illustrate the application of \ac{fp} principles in both languages. The comparison revealed distinctions in their approaches, showcasing F\#'s native support for \ac{fp} and Go's adaptation within its multi-paradigm framework.
+
     \section{Challenges}\label{sec:challenges}
     The foundation of a good comparison in the context of this paper is to write code as pure as possible to fulfill the paradigm of \ac{fp}. However, challenges arose due to the inherent impurity in both Go and F\#. While F\# aligns more closely with \ac{fp} principles, Go's multi-paradigm nature required creative workarounds to achieve a functional style. This emphasizes the importance of navigating the balancing between functional and imperative programming in each language. The challenges also highlight the need for a nuanced approach when selecting a language for projects where \ac{fp} principles and their advantages are a priority.        
 
