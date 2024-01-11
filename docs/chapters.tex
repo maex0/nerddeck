@@ -92,7 +92,7 @@ This paper is written for the master course \textit{Concepts of Programming Lang
 \chapter{Overview of functional programming}\label{chap:functional-programming}
 \begin{shaded}
     \noindent
-    \glqq{}As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularized. Functional languages push those limits back.\grqq{} \cite{Hughes1989}
+    \glqq{}As software becomes more and more complex, it is more and more important to structure it well. Well-structured software is easy to write, easy to debug, and provides a collection of modules that can be re-used to reduce future programming costs. Conventional languages place conceptual limits on the way problems can be modularized. Functional languages push those limits back.\grqq{}\ \cite{Hughes1989}
 \end{shaded}
 
 The motivation for using \ac{fp} should be considered. Within the paradigm of \ac{fp}, developers adhere to principles that prioritize the creation of expressive and concise solutions.
@@ -151,8 +151,7 @@ In contrast, the declarative style, demonstrated by Algorithm\ \ref{alg:declarat
     \BlankLine
     \Return $\sum_{\text{element in } a} \text{element}$
     
-    \caption{Declarative way of summing up an integer array}
-    \label{alg:declarative_sum}
+    \caption{Declarative way of summing up an integer array}\label{alg:declarative_sum}
 \end{algorithm}
 
 
@@ -167,8 +166,7 @@ In this chapter, we explore the distinctive features of Go and F\#, offering a b
         \item \textbf{Concurrent programming:}  Native support through \textit{goroutines} and \textit{channels} for scalable and parallelized \ac{app}s.
         \item \textbf{Efficiency:} Statically-typed, compiled that produces standalone binaries. Good for deployment in various environments.
         \item \textbf{Flexibility:} Can be used for Cloud \& Network Services, \ac{cli}s, Web Development and Development Operations \& Site Reliability Engineering.
-    \end{itemize}
-    \cite{Gowebsite}
+    \end{itemize}\ \cite{Gowebsite}
 
     \section{Overview of F\#}\label{sec:fsharp-overview}
     F\# is a functional-first programming language developed by Microsoft Research in 2005. Alongside C\# and Visual Basic, F\# is another programming language within the .NET ecosystem. According to Microsoft's official website, it is an open-source language that enables the writing of succinct, robust, and performant code. Microsoft is as a leading contributor to the language. F\# has an active community and support.\cite{Fsharpfoundation} While developing, F\# has a powerful build-in feature called \ac{repl}. In addition, its key features include:
@@ -176,27 +174,26 @@ In this chapter, we explore the distinctive features of Go and F\#, offering a b
         \item \textbf{Functional-first:} Immutable by default, First-class functions, Pattern Matching, Algebraic Data Types.
         \item \textbf{Lightweight syntax:} Type inference and automatic generalization.
         \item \textbf{Interoperability:} Access .NET Libraries and APIs (e.g. ASP.NET or Entity Framework).
-    \end{itemize}\cite{Dotnet, Keyfeaturesfsharp}
+    \end{itemize}\ \cite{Dotnet, Keyfeaturesfsharp}
 
 
 %========================================================CHAPTER 5========================================================
 
 \chapter{Comparison of functional concepts}\label{chap:comparison}
-To compare the programming languages Go and F\# in the context of \ac{fp}, we will examine two concepts in more detail: Algebraic Data Types and First-class Functions. 
+To compare the programming languages Go and F\# in the context of \ac{fp}, we will examine two concepts in more detail: Algebraic Data Types and First-class Functions.
 
     \section{Algebraic Data Types}\label{sec:algebraic-data-types}
-
-    Algebraic data types are a cornerstone of \ac{fp}, providing a way to model complex data structures. In Go, these types are not directly supported as in languages like F\#, which has native support for discriminated unions and pattern matching. In both Go and F\#, the \texttt{FlashCard} type is used to represent a flashcard, capturing essential information such as the card's ID, question, answer, number of repetitions, ease factor, and the next review date. Despite serving the same purpose, there are syntactic and structural differences between the implementations in Go and F\#.
+    Algebraic data types are fundamental in \ac{fp}, as they allow for modeling complex data structures. However, in Go, these types are not directly supported, unlike in languages such as F\#, which has native support for discriminated unions and pattern matching. In both Go and F\#, the \texttt{FlashCard} type is utilized to represent a flashcard, capturing essential information such as the card's ID, question, answer, number of repetitions, ease factor, and the next review date. Although Go and F\# serve the same purpose, there are syntactic and structural differences between their implementations.
 
     \subsection*{F\#}
-    F\# provides native support for algebraic data types through record types and discriminated unions. These enable developers to define a set of related values that can be handled concisely and expressively using pattern matching. This feature enhances the readability and maintainability of F\# code, making it a powerful tool for developers who embrace \ac{fp}.
+    F\# provides native support for algebraic data types through record types and discriminated unions. These allow developers to define a set of related values that can be handled concisely and expressively using pattern matching. This feature enhances the readability and maintainability of F\# code, making it a powerful tool for developers who embrace \ac{fp}.
 
-    Listing \ref{l:flashcardfsharp} defines the \texttt{FlashCard} from figure \ref{fig:model} using a record type\footnote{Website: \url{https://learn.microsoft.com/dotnet/fsharp/language-reference/records} (Accessed on 01/08/2024)}. The record contains fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EFactor}, and \texttt{NextReview}. Records in F\# provide automatically, making them well-suited for representing data with fixed attributes.
+    Listing\ \ref{l:flashcardfsharp} defines the \texttt{FlashCard} from figure\ \ref{fig:model} using a record type\footnote{Website: \url{https://learn.microsoft.com/dotnet/fsharp/language-reference/records} (Accessed on 01/08/2024)}. The record contains fields for \texttt{ID}, \texttt{Question}, \texttt{Answer}, \texttt{Repetitions}, \texttt{EasinessFactor}, and \texttt{NextReview}. Records in F\# are provided automatically, making them well-suited for representing data with fixed attributes.
 
     \subsection*{Go}
-    In Go, developers commonly use \texttt{struct} types to represent data structures. Although they provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by algebraic data types.
+    In Go, developers often use \texttt{struct} types to represent data structures. While they provide a way to encapsulate related data, they lack the succinct expressiveness of algebraic data types. Go's approach often involves using interfaces and composition to achieve similar outcomes, but this can lead to more verbose code compared to the concise syntax offered by algebraic data types.
 
-    Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. This can be seen in listing \ref{l:flashcardgo}. Go structs are mutable, meaning that fields can be updated after creation. Additionally, Go uses explicit types for each field, providing a statically typed approach.
+    Therefore, the \texttt{FlashCard} type is defined using a \texttt{struct}. This can be seen in listing\ \ref{l:flashcardgo}. These types are mutable, which means that their fields can be updated after they are created. Furthermore, Go employs explicit types for each field, resulting in a statically typed approach.
 
 \begin{figure}[ht]
 \begin{subfigure}{0.48\textwidth}
@@ -206,7 +203,7 @@ type FlashCard struct {
     Question    string
     Answer      string
     Repetitions int
-    EFactor     float64
+    EasinessFactor     float64
     NextReview  time.Time
 }
 \end{lstlisting}
@@ -218,7 +215,7 @@ type FlashCard =
     Question : string
     Answer : string
     Repetitions : int
-    EFactor : float
+    EasinessFactor : float
     NextReview : DateTime }
 \end{lstlisting}
 \end{subfigure}
@@ -229,7 +226,7 @@ type FlashCard =
     Both Go and F\# support first-class functions, treating functions as first-class citizens. In Go, functions can be assigned to variables, passed as arguments, and returned as values. The use of anonymous functions, known as closures, is common in Go, enhancing the \ac{fp} paradigm. Similarly, F\# provides robust support for first-class functions, aligning with its \ac{fp} paradigm. Functions in F\# can be assigned to variables, passed as arguments, and returned as values. The language encourages the use of higher-order functions, enabling powerful abstractions through functions.
 
     \subsection*{F\#}
-    In the F\# example in listing \ref{l:dueforreviewfsharp}, we define a first-class function \texttt{isDueForReview} that checks if a flashcard is due for review based on specific criteria. We then use this function to filter a list of flashcards, to check if a flashcard is due for learning or not. The return value of the function should be a list of due flashcards. As an example in line four, the function is called on the List.filter function. It takes a predicate of type \texttt{T -> bool} and a list as input and returns a list containing only the elements that satisfy the predicate.\footnote{Website: \url{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html\#filter} (Accessed on 01/08/2024)} Moreover, F\# introduces the pipe operator \texttt{|>}, affording developers the convenience of placing the last argument at the forefront. This operator facilitates a more fluid and readable syntax, as exemplified by \texttt{cards |> List.filter isDueForReview}, where the \texttt{isDueForReview} function is seamlessly applied to the \texttt{cards} list through the pipe operator. This expression is equivalent to line four of listing \ref{l:dueforreviewfsharp}. The same functionality should no be implemented in the Go programming language.
+    Listing\ \ref{l:dueforreviewfsharp} provides an example in F\# where a first-class function is defined named \texttt{isDueForReview} to check if a flashcard is due for review based on specific criteria. This function is then used to filter a list of flashcards to determine which ones are due for learning. The function should return a list of due flashcards. For instance, in line four, the function is called on the \texttt{List.filter} function. The function takes a predicate of type \texttt{T -> bool} and a list as input, and returns a list containing only the elements that satisfy the predicate.\footnote{Website: \url{https://fsharp.github.io/fsharp-core-docs/reference/fsharp-collections-listmodule.html\#filter} (Accessed on 01/08/2024)} Additionally, F\# provides the pipe operator \texttt{|>} which allows developers to place the last argument at the forefront for convenience. This operator enables a smoother and more readable syntax, as demonstrate by the code \texttt{cards |> List.filter isDueForReview}, where the \texttt{isDueForReview} function is seamlessly applied to the \texttt{cards} list using the pipe operator. This expression is equivalent to line four of listing\ \ref{l:dueforreviewfsharp}. The same functionality should now be implemented in the Go programming language.
 
 \begin{lstlisting}[language=fsharp, firstnumber=1,float=tp, caption={First-class function reresentation in F\#}, label=l:dueforreviewfsharp]
 let isDueForReview card =
@@ -239,11 +236,11 @@ let dueFlashCards = List.filter isDueForReview cards
 \end{lstlisting}
         
     \subsection*{Go}
-    In the Go example in listing \ref{l:flashcardgo}, we define the same first-class function \texttt{isDueForReview} than in F\# that checks if a flashcard is due for review based on specific criteria. The filter function from line six called \texttt{filterDueFlashCards} takes a slice of flashcards (\texttt{cards}) and applies the \texttt{isDueForReview} function to filter out only those flashcards that meet the review criteria. The filtered flashcards are then collected in the \texttt{dueFlashCards} slice and will be returned when all cards are covered.
+    Listing\ \ref{l:flashcardgo} provides a Go example that defines the first-class function \texttt{isDueForReview}, which is similar to the one above in the F\# example. The \texttt{filterDueFlashCards} function on line six takes a slice of flashcards (\texttt{cards}) and applies the \texttt{isDueForReview} function to filter out only the flashcards that meet the review criteria. The filtered flashcards are then collected in the \texttt{dueFlashCards} slice and will be returned when all cards are covered.
     
-    As an example, line 17 invokes the \texttt{filterDueFlashCards} function with a given set of flashcards (\texttt{cards}) and assigns the resulting list of flashcards due for review to the \texttt{dueFlashCards} variable. This variable encapsulates the outcome of the flashcard filtering process.
+    For instance, on line 16, the function \texttt{filterDueFlashCards} is called with a given set of flashcards (\texttt{cards}) as input. The resulting list of flashcards due for review is then assigned to the variable \texttt{dueFlashCards}. This variable contains the outcome of the flashcard filtering process.
 
-\begin{lstlisting}[language=go, firstnumber=1, caption={FlashCard representation in F\#}, label=l:dueforreviewgo]
+\begin{lstlisting}[language=go, firstnumber=1, caption={First-class function reresentation in Go}, label=l:dueforreviewgo]
 func isDueForReview(card FlashCard) bool {
     return card.Repetitions > 0 
     && card.NextReview.Before(time.Now())
@@ -259,13 +256,12 @@ func filterDueFlashCards(cards []FlashCard) []FlashCard {
     return dueFlashCards
 }
 
-
 dueFlashCards := filterDueFlashCards(cards)
 \end{lstlisting}
             
 
     \section{Key Takeaway}\label{sec:keytakeaway}
-    While Go's \texttt{struct} types are mutable by default, F\#'s \texttt{record} types are immutable by default. Immutability simplifies reasoning about state and enables certain optimizations. It is worth noting that every field in Go must have an explicitly defined type, whereas in F\#, they are inferred based on their usage. Neither language supports inheritance. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and \ac{fp} styles. The difference between the two languages lies in their syntax and expressiveness. This can be seen in each of the four examples in listing \ref{l:flashcardgo}, \ref{l:flashcardfsharp}, \ref{l:dueforreviewfsharp} and \ref{l:dueforreviewgo}. It is worth noting that neither language is completely pure. While Go allows for mutation, even F\#, which is primarily a functional language, permits its use.
+    Although Go's \texttt{struct} types are mutable by default, F\#'s \texttt{record} types are immutable by default. Immutability simplifies reasoning about state and enables certain optimizations. It is worth noting that every field in Go must have an explicitly defined type, whereas in F\#, they are inferred based on their usage. Neither language supports inheritance. Both languages support first-class functions, making them suitable choices for developers with different preferences in balancing imperative and \ac{fp} styles. The difference between the two languages lies in their syntax and expressiveness. This can be seen in each of the four examples in listing\ \ref{l:flashcardgo},\ \ref{l:flashcardfsharp},\ \ref{l:dueforreviewfsharp}, and\ \ref{l:dueforreviewgo}. It is worth noting that neither language is completely pure. While Go allows for mutation, even F\#, which is primarily a functional language, permits its use.
 
 
 %========================================================CHAPTER 5========================================================
