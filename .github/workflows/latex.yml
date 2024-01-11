@@ -1,6 +1,9 @@
 name: Build- and Release LaTeX paper
 
-on: [push]
+on:
+  push:
+    paths:
+      - docs/**
 
 jobs:
   build_latex:
