@@ -5,6 +5,9 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/fsharp/NerdDeckFSharp
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -15,10 +18,12 @@ jobs:
           dotnet-version: '7.0.x'
       - name: Build F#
         run: dotnet build
-        working-directory: ${{ github.workspace }}/fsharp/NerdDeckFSharp
   test:
     runs-on: ubuntu-latest
     needs: build
+    defaults:
+      run:
+        working-directory: ${{ github.workspace }}/fsharp/NerdDeckFSharp
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -30,12 +35,14 @@ jobs:
       - name: Test F#
         run: |
           echo "## ❔ Test results" >> $GITHUB_STEP_SUMMARY
-          dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=${{github.workspace}}/coverage.json;CoverletOutput=${{github.workspace}}/coverage' -- RunConfiguration.CollectSourceInformation=true
-          dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=${{github.workspace}}/coverage.json;CoverletOutput=${{github.workspace}}/coverage' -- RunConfiguration.CollectSourceInformation=true
+          dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=$/coverage.json;CoverletOutput=$/coverage' -- RunConfiguration.CollectSourceInformation=true
+          dotnet test --configuration Release -v minimal --no-build --logger GitHubActions '/p:CollectCoverage=true;CoverletOutputFormat="json,lcov,cobertura";MergeWith=$/coverage.json;CoverletOutput=$/coverage' -- RunConfiguration.CollectSourceInformation=true
         working-directory: /fsharp/NerdDeckFSharp
 
-      - name: ReportGenerator
-        uses: danielpalme/ReportGenerator-GitHub-Action@5.2.0
-        with:
-          reports: cobertura.xml
-          targetdir: coveragereport
+      - name: 📝 Code Coverage report
+        run: |
+          dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.23
+          reportgenerator -reports:${{github.workspace}}/coverage.cobertura.xml -targetdir:${{github.workspace}}/report -reporttypes:MarkdownSummaryGithub "-filefilters:-*.g.cs;-*.gen.cs" -verbosity:Warning
+          sed -i 's/# Summary/## 📝 Code Coverage/g' ${{github.workspace}}/report/SummaryGithub.md
+          sed -i 's/## Coverage/### Code Coverage details/g' ${{github.workspace}}/report/SummaryGithub.md
+          cat ${{github.workspace}}/report/*.md >> $GITHUB_STEP_SUMMARY
